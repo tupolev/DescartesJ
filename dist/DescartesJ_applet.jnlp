@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="6.0" xmlns:jfx="http://javafx.com" href="DescartesJ_applet.jnlp">
+    <information>
+        <title>DescartesJ</title>
+        <vendor>tupolev</vendor>
+        <description>Swing applet embedding JavaFX components.</description> 
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="DescartesJ.jar" size="24537" download="eager" />
+    </resources>
+    <resources>
+        <jfx:javafx-runtime version="2.0+" 
+            href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+    </resources>
+    <applet-desc width="800" height="600"
+         main-class="descartesj.DescartesJ"
+         name="DescartesJ">
+    </applet-desc>
+    <update check="always"/>
+</jnlp>
