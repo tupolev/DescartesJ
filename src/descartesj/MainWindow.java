@@ -720,16 +720,20 @@ public class MainWindow extends javax.swing.JFrame {
                 }// </editor-fold>//GEN-END:initComponents
 
     private void buttonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseActionPerformed
-            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-            if (folderBrowser.ShowDialog().Equals(System.Windows.Forms.DialogResult.OK))
-            {
-                textBoxInputFolder.Text = folderBrowser.SelectedPath;
-                textBoxOutputSelectedFolder.Text = textBoxInputFolder.Text + @"\selected\";
-                textBoxOutputDiscardedFolder.Text = textBoxInputFolder.Text + @"\discarded\";
+        JFileChooser folderBrowser = new JFileChooser();
+        folderBrowser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY);
+        int retval = folderBrowser.showOpenDialog(this);
+        if (retval == JFileChooser.APPROVE_OPTION)
+        {
+            textBoxInputFolder.setText(folderBrowser.getSelectedFile().getAbsolutePath());
+            textBoxOutputSelectedFolder.setText(textBoxInputFolder.getText() 
+                    + java.io.File.pathSeparator + "selected" + java.io.File.pathSeparator);
+            textBoxOutputDiscardedFolder.setText(textBoxInputFolder.getText() 
+                    + java.io.File.pathSeparator + "discarded" + java.io.File.pathSeparator);
 
-                this.buttonReloadFilesFound_Click(sender, e);
+            buttonReloadFilesFoundActionPerformed(evt);
 
-            }
+        }
     }//GEN-LAST:event_buttonBrowseActionPerformed
 
     private void buttonReloadFilesFoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadFilesFoundActionPerformed
