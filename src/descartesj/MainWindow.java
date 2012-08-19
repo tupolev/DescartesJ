@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package descartesj;
+import javax.swing.*;
 
 /**
  *
@@ -10,11 +11,19 @@ package descartesj;
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    public DirectoryHandler dh;
+    public ImageIcon unavailableImage, prevImage, nextImage, currentImage;
+    public String app_path;
+    
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
+        app_path = DirectoryHandler.getAppPath();
+        unavailableImage = new ImageIcon(
+                app_path + java.io.File.pathSeparator + "images" + java.io.File.pathSeparator + "no.gif"
+                );
     }
 
     /**
@@ -77,37 +86,80 @@ public class MainWindow extends javax.swing.JFrame {
         labelNumSelectedImages = new javax.swing.JLabel();
         labelNumDiscardedImages = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        buttonStartAgainWithSelected = new javax.swing.JButton();
+        buttonStartAgainWithDiscarded = new javax.swing.JButton();
+        buttonStartAgainWithNew = new javax.swing.JButton();
+        buttonExitNow = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        labelSummaryTotalFiles = new javax.swing.JLabel();
+        labelSummarySelectedFiles = new javax.swing.JLabel();
+        labelSummaryDiscardedFiles = new javax.swing.JLabel();
+        labelSummaryIgnoredFiles = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        labelSummaryOpenInputFolder = new javax.swing.JLabel();
+        labelSummaryOpenSelectedFolder = new javax.swing.JLabel();
+        labelSummaryOpenDiscardedFolder = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                formAncestorResized(evt);
+            }
+        });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
 
         textBoxInputFolder.setText("c:\\");
+            textBoxInputFolder.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    textBoxInputFolderActionPerformed(evt);
+                }
+            });
 
             buttonBrowse.setText("...");
+            buttonBrowse.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    buttonBrowseActionPerformed(evt);
+                }
+            });
 
             textBoxOutputSelectedFolder.setText("c:\\");
+                textBoxOutputSelectedFolder.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        textBoxOutputSelectedFolderActionPerformed(evt);
+                    }
+                });
 
                 textBoxOutputDiscardedFolder.setText("c:\\");
+                    textBoxOutputDiscardedFolder.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            textBoxOutputDiscardedFolderActionPerformed(evt);
+                        }
+                    });
 
                     buttonBrowseSelectedFolder.setText("...");
+                    buttonBrowseSelectedFolder.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonBrowseSelectedFolderActionPerformed(evt);
+                        }
+                    });
 
                     buttonBrowseDiscardedFolder.setText("...");
+                    buttonBrowseDiscardedFolder.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonBrowseDiscardedFolderActionPerformed(evt);
+                        }
+                    });
 
                     jScrollPane1.setViewportView(listViewFilesFound);
 
@@ -117,8 +169,18 @@ public class MainWindow extends javax.swing.JFrame {
 
                     buttonReloadFilesFound.setText("Reload");
                     buttonReloadFilesFound.setName("buttonReloadFilesFound"); // NOI18N
+                    buttonReloadFilesFound.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonReloadFilesFoundActionPerformed(evt);
+                        }
+                    });
 
                     buttonStartProcess.setText("Start process");
+                    buttonStartProcess.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonStartProcessActionPerformed(evt);
+                        }
+                    });
 
                     jLabel1.setText("Select folder to review...");
 
@@ -231,14 +293,34 @@ public class MainWindow extends javax.swing.JFrame {
                     );
 
                     buttonRestart.setText("<< Restart");
+                    buttonRestart.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonRestartActionPerformed(evt);
+                        }
+                    });
 
                     buttonNextStep.setText("Next step >>");
+                    buttonNextStep.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonNextStepActionPerformed(evt);
+                        }
+                    });
 
                     buttonDiscard.setBackground(new java.awt.Color(153, 255, 0));
                     buttonDiscard.setText("Select");
+                    buttonDiscard.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonDiscardActionPerformed(evt);
+                        }
+                    });
 
                     buttonSelect.setBackground(new java.awt.Color(255, 0, 51));
                     buttonSelect.setText("Discard");
+                    buttonSelect.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonSelectActionPerformed(evt);
+                        }
+                    });
 
                     labelCurrentImageStatus.setText("UNRATED");
 
@@ -264,8 +346,18 @@ public class MainWindow extends javax.swing.JFrame {
                     );
 
                     buttonPrevImage.setText("< Prev. Image");
+                    buttonPrevImage.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonPrevImageActionPerformed(evt);
+                        }
+                    });
 
                     buttonNextImage.setText("Next image >");
+                    buttonNextImage.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonNextImageActionPerformed(evt);
+                        }
+                    });
 
                     javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
                     jPanel3.setLayout(jPanel3Layout);
@@ -289,14 +381,14 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(buttonPrevImage)
-                                            .addGap(27, 27, 27)
+                                            .addComponent(buttonPrevImage, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
                                             .addComponent(buttonDiscard, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(61, 61, 61)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                                             .addComponent(labelCurrentImageStatus)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                            .addGap(31, 31, 31)
                                             .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(29, 29, 29)
+                                            .addGap(18, 18, 18)
                                             .addComponent(buttonNextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -304,10 +396,10 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(buttonNextStep)
+                                        .addComponent(jLabel5)
                                         .addContainerGap()))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
+                                    .addComponent(buttonNextStep)
                                     .addContainerGap())))
                     );
                     jPanel3Layout.setVerticalGroup(
@@ -325,22 +417,20 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(imageCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(0, 62, Short.MAX_VALUE))
+                                    .addGap(0, 0, Short.MAX_VALUE))
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(buttonNextImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(buttonNextStep, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(buttonDiscard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(labelCurrentImageStatus)
-                                                    .addComponent(buttonPrevImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                        .addComponent(buttonRestart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(buttonNextImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(buttonNextStep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(labelCurrentImageStatus))
+                                        .addComponent(buttonPrevImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(buttonRestart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addContainerGap())
                     );
 
@@ -369,6 +459,11 @@ public class MainWindow extends javax.swing.JFrame {
                     comboBoxDiscardedImagesOutputFormat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Files", "List", "Files and list" }));
 
                     buttonEndProcess.setText("End process");
+                    buttonEndProcess.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonEndProcessActionPerformed(evt);
+                        }
+                    });
 
                     jLabel12.setText("Selected images");
 
@@ -455,37 +550,78 @@ public class MainWindow extends javax.swing.JFrame {
 
                     tabControlMain.addTab("3-The output", jPanel4);
 
-                    jButton9.setText("jButton9");
+                    buttonStartAgainWithSelected.setText("Start again, using selected files as input");
+                    buttonStartAgainWithSelected.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                    buttonStartAgainWithSelected.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonStartAgainWithSelectedActionPerformed(evt);
+                        }
+                    });
 
-                    jButton10.setText("jButton10");
+                    buttonStartAgainWithDiscarded.setText("Start again, using discarded files as input");
+                    buttonStartAgainWithDiscarded.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                    buttonStartAgainWithDiscarded.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonStartAgainWithDiscardedActionPerformed(evt);
+                        }
+                    });
 
-                    jButton11.setText("jButton11");
+                    buttonStartAgainWithNew.setText("Start again, using a new input folder");
+                    buttonStartAgainWithNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                    buttonStartAgainWithNew.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonStartAgainWithNewActionPerformed(evt);
+                        }
+                    });
 
-                    jButton12.setText("jButton12");
+                    buttonExitNow.setText("Exit now");
+                    buttonExitNow.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                    buttonExitNow.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonExitNowActionPerformed(evt);
+                        }
+                    });
 
-                    jLabel16.setText("jLabel16");
+                    jLabel16.setText("What do you want to do next?");
 
-                    jLabel17.setText("jLabel17");
+                    labelSummaryTotalFiles.setText("0");
 
-                    jLabel18.setText("jLabel18");
+                    labelSummarySelectedFiles.setText("0");
 
-                    jLabel19.setText("jLabel19");
+                    labelSummaryDiscardedFiles.setText("0");
 
-                    jLabel20.setText("jLabel20");
+                    labelSummaryIgnoredFiles.setText("0");
 
-                    jLabel21.setText("jLabel21");
+                    jLabel22.setText("total files");
 
-                    jLabel22.setText("jLabel22");
+                    jLabel23.setText("selected files");
 
-                    jLabel23.setText("jLabel23");
+                    jLabel24.setText("discarded files");
 
-                    jLabel24.setText("jLabel24");
+                    jLabel25.setText("ignored files");
 
-                    jLabel25.setText("jLabel25");
+                    jLabel27.setText("Summary");
 
-                    jLabel26.setText("jLabel26");
+                    labelSummaryOpenInputFolder.setText("Open input folder");
+                    labelSummaryOpenInputFolder.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                            labelSummaryOpenInputFolderMouseClicked(evt);
+                        }
+                    });
 
-                    jLabel27.setText("jLabel27");
+                    labelSummaryOpenSelectedFolder.setText("Open selected images folder");
+                    labelSummaryOpenSelectedFolder.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                            labelSummaryOpenSelectedFolderMouseClicked(evt);
+                        }
+                    });
+
+                    labelSummaryOpenDiscardedFolder.setText("Open discarded images folder");
+                    labelSummaryOpenDiscardedFolder.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                            labelSummaryOpenDiscardedFolderMouseClicked(evt);
+                        }
+                    });
 
                     javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
                     jPanel5.setLayout(jPanel5Layout);
@@ -495,33 +631,32 @@ public class MainWindow extends javax.swing.JFrame {
                             .addContainerGap()
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(buttonStartAgainWithSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(buttonStartAgainWithDiscarded, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                                    .addComponent(buttonStartAgainWithNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(buttonExitNow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel16)
                                     .addComponent(jSeparator1))
                                 .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel17)
+                                    .addComponent(labelSummaryTotalFiles)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel22))
                                 .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel18)
+                                    .addComponent(labelSummarySelectedFiles)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel23))
                                 .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel19)
+                                    .addComponent(labelSummaryDiscardedFiles)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel24))
                                 .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel20)
+                                    .addComponent(labelSummaryIgnoredFiles)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel25))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jLabel21)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel26))
-                                .addComponent(jLabel27))
+                                .addComponent(jLabel27)
+                                .addComponent(labelSummaryOpenInputFolder)
+                                .addComponent(labelSummaryOpenSelectedFolder)
+                                .addComponent(labelSummaryOpenDiscardedFolder))
                             .addContainerGap(600, Short.MAX_VALUE))
                     );
                     jPanel5Layout.setVerticalGroup(
@@ -531,37 +666,39 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jLabel27)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel17)
+                                .addComponent(labelSummaryTotalFiles)
                                 .addComponent(jLabel22))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel18)
+                                .addComponent(labelSummarySelectedFiles)
                                 .addComponent(jLabel23))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel19)
+                                .addComponent(labelSummaryDiscardedFiles)
                                 .addComponent(jLabel24))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel20)
+                                .addComponent(labelSummaryIgnoredFiles)
                                 .addComponent(jLabel25))
+                            .addGap(43, 43, 43)
+                            .addComponent(labelSummaryOpenInputFolder)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel21)
-                                .addComponent(jLabel26))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                            .addComponent(labelSummaryOpenSelectedFolder)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(labelSummaryOpenDiscardedFolder)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                             .addComponent(jLabel16)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(9, 9, 9)
-                            .addComponent(jButton9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(buttonStartAgainWithSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton10)
+                            .addComponent(buttonStartAgainWithDiscarded, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton11)
+                            .addComponent(buttonStartAgainWithNew, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton12)
-                            .addGap(30, 30, 30))
+                            .addComponent(buttonExitNow, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(63, 63, 63))
                     );
 
                     tabControlMain.addTab("4-The end", jPanel5);
@@ -582,6 +719,454 @@ public class MainWindow extends javax.swing.JFrame {
                     pack();
                 }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseActionPerformed
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            if (folderBrowser.ShowDialog().Equals(System.Windows.Forms.DialogResult.OK))
+            {
+                textBoxInputFolder.Text = folderBrowser.SelectedPath;
+                textBoxOutputSelectedFolder.Text = textBoxInputFolder.Text + @"\selected\";
+                textBoxOutputDiscardedFolder.Text = textBoxInputFolder.Text + @"\discarded\";
+
+                this.buttonReloadFilesFound_Click(sender, e);
+
+            }
+    }//GEN-LAST:event_buttonBrowseActionPerformed
+
+    private void buttonReloadFilesFoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadFilesFoundActionPerformed
+        listViewFilesFound.Items.Clear();
+            progressBarLoading.Visibility = System.Windows.Visibility.Visible;
+            labelNumFiles.Content = "Loading";
+            dh = new DirectoryHandler(textBoxInputFolder.Text);
+            labelNumFiles.Content = dh.fillInputList();
+            foreach (Image item in dh.inputList.getList())
+            {
+
+                String extensions = "";
+                foreach (descartes.File file in item.getFiles())
+                {
+                    extensions += "(" + file.Ext + ")";
+                }
+
+                listViewFilesFound.Items.Add(
+                        item.getFileTitle() + " " + extensions
+                    );
+            }
+
+            progressBarLoading.Visibility = System.Windows.Visibility.Hidden;
+    }//GEN-LAST:event_buttonReloadFilesFoundActionPerformed
+
+    private void textBoxInputFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxInputFolderActionPerformed
+        if (Directory.Exists(textBoxInputFolder.Text))
+            {
+                textBoxInputFolder.Background = Brushes.LightGreen;
+                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = true;
+            }
+            else
+            {
+                textBoxInputFolder.Background = Brushes.LightCoral;
+                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = false;
+            }
+    }//GEN-LAST:event_textBoxInputFolderActionPerformed
+
+    private void buttonStartProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartProcessActionPerformed
+        dh.inputList.Current = 0;
+            imagePrev.Source = unavailableImage;
+
+            dh.OutputSelectedPath = textBoxOutputSelectedFolder.Text;
+            dh.OutputDiscardedPath = textBoxOutputDiscardedFolder.Text;
+
+            String pathCurr = dh.getImagePathForItem(dh.inputList.Current, ".JPG");
+            imageCurrent.Source = System.IO.File.Exists(pathCurr) ? new BitmapImage(new Uri(pathCurr)) : unavailableImage;
+            labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
+            setCurrentImageStatusLabel();
+
+            String pathNext = dh.getImagePathForItem(dh.inputList.Current + 1, ".JPG");
+            BitmapImage bmp = System.IO.File.Exists(pathNext) ? new BitmapImage(new Uri(pathNext)) : unavailableImage;
+            imageNext.Source = bmp;
+            labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
+            labelCurrentImagePositionInList.Content = getCurrentImagePositionCaption();
+            tabItemProcess.IsEnabled = true;
+            tabItemOutput.IsEnabled = true;
+            checkInputListBounds();
+            tabItemProcess.Focus();
+    }//GEN-LAST:event_buttonStartProcessActionPerformed
+
+    private void buttonPrevImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrevImageActionPerformed
+        System.Windows.Input.Cursor oldCursor = this.Cursor;
+            this.Cursor = System.Windows.Input.Cursors.AppStarting;
+            if ((Int32)dh.inputList.Current < dh.inputList.count()
+                && (Int32)dh.inputList.Current > 0)
+            {
+                dh.inputList.Current--;
+
+                String pathPrev = dh.getImagePathForItem(dh.inputList.Current - 1, ".JPG");
+                prevImage = null;
+                prevImage = (System.IO.File.Exists(pathPrev)) ? new BitmapImage(new Uri(pathPrev)) : unavailableImage;
+                imagePrev.Source = prevImage;
+                prevImage = null;
+                labelPrevImageFilename.Content = System.IO.Path.GetFileName(pathPrev);
+
+                String pathCurr = dh.getImagePathForItem(dh.inputList.Current, ".JPG");
+                currentImage = null;
+                currentImage = (System.IO.File.Exists(pathCurr)) ? new BitmapImage(new Uri(pathCurr)) : unavailableImage;
+                imageCurrent.Source = currentImage;
+                currentImage = null;
+                labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
+                setCurrentImageStatusLabel();
+
+                String pathNext = dh.getImagePathForItem(dh.inputList.Current + 1, ".JPG");
+                nextImage = null;
+                nextImage = (System.IO.File.Exists(pathNext)) ? new BitmapImage(new Uri(pathNext)) : unavailableImage;
+                imageNext.Source = nextImage;
+                prevImage = null;
+                labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
+            }
+            else
+            {
+                imagePrev.Source = unavailableImage;
+            }
+            labelCurrentImagePositionInList.Content = getCurrentImagePositionCaption();
+            checkInputListBounds();
+            this.Cursor = oldCursor;
+    }//GEN-LAST:event_buttonPrevImageActionPerformed
+
+    private void buttonNextImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextImageActionPerformed
+        System.Windows.Input.Cursor oldCursor = this.Cursor;
+            this.Cursor = System.Windows.Input.Cursors.AppStarting;
+
+            if ((Int32)dh.inputList.Current < dh.inputList.count()
+                && (Int32)dh.inputList.Current >= 0)
+            {
+                dh.inputList.Current++;
+
+                String pathPrev = dh.getImagePathForItem(dh.inputList.Current - 1, ".JPG");
+                prevImage = null;
+                prevImage = (System.IO.File.Exists(pathPrev)) ? new BitmapImage(new Uri(pathPrev)) : unavailableImage;
+                imagePrev.Source = prevImage;
+                prevImage = null;
+                labelPrevImageFilename.Content = System.IO.Path.GetFileName(pathPrev);
+
+                String pathCurr = dh.getImagePathForItem(dh.inputList.Current, ".JPG");
+                currentImage = null;
+                currentImage = (System.IO.File.Exists(pathCurr)) ? new BitmapImage(new Uri(pathCurr)) : unavailableImage;
+                imageCurrent.Source = currentImage;
+                currentImage = null;
+                labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
+                setCurrentImageStatusLabel();
+
+                String pathNext = dh.getImagePathForItem(dh.inputList.Current + 1, ".JPG");
+                nextImage = null;
+                nextImage = (System.IO.File.Exists(pathNext)) ? new BitmapImage(new Uri(pathNext)) : unavailableImage;
+                imageNext.Source = nextImage;
+                prevImage = null;
+                labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
+            }
+            else
+            {
+                imagePrev.Source = unavailableImage;
+            }
+            labelCurrentImagePositionInList.Content = getCurrentImagePositionCaption();
+            checkInputListBounds();
+            this.Cursor = oldCursor;
+    }//GEN-LAST:event_buttonNextImageActionPerformed
+
+    private void buttonDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDiscardActionPerformed
+        dh.inputList.selectCurrent();
+            dh.removeFromDiscardedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
+            dh.removeFromSelectedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
+            dh.addToSelectedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
+            setCurrentImageStatusLabel();
+    }//GEN-LAST:event_buttonDiscardActionPerformed
+
+    private void buttonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectActionPerformed
+        dh.inputList.discardCurrent();
+            dh.removeFromSelectedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
+            dh.removeFromDiscardedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
+            dh.addToDiscardedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
+            setCurrentImageStatusLabel();
+    }//GEN-LAST:event_buttonSelectActionPerformed
+
+    private void buttonRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRestartActionPerformed
+         buttonStartProcess_Click(sender, e);
+    }//GEN-LAST:event_buttonRestartActionPerformed
+
+    private void buttonNextStepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextStepActionPerformed
+        listViewSelectedImages.Items.Clear();
+            listViewDiscardedImages.Items.Clear();
+            foreach (Image item in dh.selectedList.getList())
+            {
+                String extensions = "";
+                foreach (descartes.File file in item.getFiles())
+                {
+                    extensions += "(" + file.Ext + ")";
+                }
+
+                listViewSelectedImages.Items.Add(
+                        item.getFileTitle() + " " + extensions
+                    );
+            }
+            labelNumSelectedImages.Content = "(" + dh.selectedList.count().ToString() + ")";
+            foreach (Image item in dh.discardedList.getList())
+            {
+                String extensions = "";
+                foreach (descartes.File file in item.getFiles())
+                {
+                    extensions += "(" + file.Ext + ")";
+                }
+
+                listViewDiscardedImages.Items.Add(
+                        item.getFileTitle() + " " + extensions
+                    );
+            }
+            labelNumDiscardedImages.Content = "(" + dh.discardedList.count().ToString() + ")";
+            tabItemOutput.Focus();
+    }//GEN-LAST:event_buttonNextStepActionPerformed
+
+    private void buttonEndProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEndProcessActionPerformed
+        progressBarOutputProcess.Minimum = 0;
+            progressBarOutputProcess.Maximum = dh.discardedList.count() + dh.selectedList.count();
+
+            dh.GenerateListFileForSelectedFiles = (comboBoxSelectedImagesOutputFormat.SelectedIndex == 1 || comboBoxSelectedImagesOutputFormat.SelectedIndex == 2);
+            dh.GenerateListFileForDiscardedFiles = (comboBoxDiscardedImagesOutputFormat.SelectedIndex == 1 || comboBoxDiscardedImagesOutputFormat.SelectedIndex == 2);
+            dh.GenerateFileStructureForSelectedFiles = (comboBoxSelectedImagesOutputFormat.SelectedIndex == 0 || comboBoxSelectedImagesOutputFormat.SelectedIndex == 2);
+            dh.GenerateFileStructureForDiscardedFiles = (comboBoxDiscardedImagesOutputFormat.SelectedIndex == 0 || comboBoxDiscardedImagesOutputFormat.SelectedIndex == 2);
+            dh.DiscardedFilesListFileFullName = dh.OutputDiscardedPath + @"\..\descartes.discarded.lst";
+            dh.SelectedFilesListFileFullName = dh.OutputSelectedPath + @"\..\descartes.selected.lst";
+            dh.KeepCopyOfDiscardedFiles = (comboBoxDiscardedImagesMoveCopy.SelectedIndex == 2);
+            dh.KeepCopyOfSelectedFiles = (comboBoxSelectedImagesMoveCopy.SelectedIndex == 2);
+
+
+            
+            dh.Progress += new DirectoryHandler.ProgressHandler(onSeparateFilesProgress);
+            dh.Finish += new DirectoryHandler.ProgressHandler(onSeparateFilesFinish);
+            dh.separateFiles();
+    }//GEN-LAST:event_buttonEndProcessActionPerformed
+
+    private void textBoxOutputSelectedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxOutputSelectedFolderActionPerformed
+        if (!textBoxOutputSelectedFolder.Text.Equals(""))
+            {
+                textBoxOutputSelectedFolder.Background = Brushes.LightGreen;
+                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = true;
+            }
+            else
+            {
+                textBoxOutputSelectedFolder.Background = Brushes.LightCoral;
+                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = false;
+            }
+    }//GEN-LAST:event_textBoxOutputSelectedFolderActionPerformed
+
+    private void textBoxOutputDiscardedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxOutputDiscardedFolderActionPerformed
+        if (!textBoxOutputDiscardedFolder.Text.Equals(""))
+            {
+                textBoxOutputDiscardedFolder.Background = Brushes.LightGreen;
+                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = true;
+            }
+            else
+            {
+                textBoxOutputDiscardedFolder.Background = Brushes.LightCoral;
+                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = false;
+            }
+    }//GEN-LAST:event_textBoxOutputDiscardedFolderActionPerformed
+
+    private void buttonBrowseSelectedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseSelectedFolderActionPerformed
+        FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            if (folderBrowser.ShowDialog().Equals(System.Windows.Forms.DialogResult.OK))
+            {
+                textBoxOutputSelectedFolder.Text = folderBrowser.SelectedPath;
+            }
+    }//GEN-LAST:event_buttonBrowseSelectedFolderActionPerformed
+
+    private void buttonBrowseDiscardedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseDiscardedFolderActionPerformed
+         FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            if (folderBrowser.ShowDialog().Equals(System.Windows.Forms.DialogResult.OK))
+            {
+                textBoxOutputDiscardedFolder.Text = folderBrowser.SelectedPath;
+            }
+    }//GEN-LAST:event_buttonBrowseDiscardedFolderActionPerformed
+
+    private void buttonExitNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitNowActionPerformed
+        descartes.App.Current.Shutdown();
+    }//GEN-LAST:event_buttonExitNowActionPerformed
+
+    private void buttonStartAgainWithNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartAgainWithNewActionPerformed
+        cleanUpControls();
+    }//GEN-LAST:event_buttonStartAgainWithNewActionPerformed
+
+    private void labelSummaryOpenInputFolderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSummaryOpenInputFolderMouseClicked
+        dh.openExplorerWindow(dh.Path);
+    }//GEN-LAST:event_labelSummaryOpenInputFolderMouseClicked
+
+    private void buttonStartAgainWithSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartAgainWithSelectedActionPerformed
+        string dir = dh.OutputSelectedPath;
+            cleanUpControls();
+            this.loadPreset(dir);
+    }//GEN-LAST:event_buttonStartAgainWithSelectedActionPerformed
+
+    private void labelSummaryOpenSelectedFolderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSummaryOpenSelectedFolderMouseClicked
+         dh.openExplorerWindow(dh.OutputSelectedPath);
+    }//GEN-LAST:event_labelSummaryOpenSelectedFolderMouseClicked
+
+    private void labelSummaryOpenDiscardedFolderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSummaryOpenDiscardedFolderMouseClicked
+        dh.openExplorerWindow(dh.OutputDiscardedPath);
+    }//GEN-LAST:event_labelSummaryOpenDiscardedFolderMouseClicked
+
+    private void buttonStartAgainWithDiscardedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartAgainWithDiscardedActionPerformed
+        string dir = dh.OutputDiscardedPath;
+            cleanUpControls();
+            this.loadPreset(dir);
+    }//GEN-LAST:event_buttonStartAgainWithDiscardedActionPerformed
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        this.dyn_resize();  
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void formAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_formAncestorResized
+        this.dyn_resize();
+    }//GEN-LAST:event_formAncestorResized
+
+    
+    private Boolean cleanUpControls(){
+            Boolean ret = true;
+            ret = dh.cleanupProcessVars();
+            progressBarOutputProcess.Value = 0;
+            progressBarOutputProcess.Maximum = 0;
+            listViewDiscardedImages.Items.Clear();
+            listViewSelectedImages.Items.Clear();
+            imageCurrent.Source = null;
+            imagePrev.Source = null;
+            imageNext.Source = null;
+            buttonPrevImage.IsEnabled = false;
+            buttonNextImage.IsEnabled = false;
+            listViewFilesFound.Items.Clear();
+            labelNumFiles.Content = "0";
+            textBoxOutputDiscardedFolder.Text = @"c:\";
+            textBoxOutputSelectedFolder.Text = @"c:\";
+            textBoxInputFolder.Text = @"c:\";
+            buttonStartProcess.IsEnabled = false;
+            tabItemInput.IsEnabled = true;
+            tabItemProcess.IsEnabled = false;
+            tabItemOutput.IsEnabled = false;
+            tabItemEnd.IsEnabled = false;
+            tabItemInput.Focus();
+            return ret;
+        }
+
+    private void loadPreset(string initialDir) {
+        textBoxInputFolder.Text = initialDir;
+        textBoxOutputSelectedFolder.Text = textBoxInputFolder.Text + @"selected\";
+        textBoxOutputDiscardedFolder.Text = textBoxInputFolder.Text + @"discarded\";
+        this.buttonReloadFilesFound_Click(null, null);
+        tabItemInput.Focus();
+    }
+        
+    private String getCurrentImagePositionCaption() {
+            return "(" + (dh.inputList.Current + 1).ToString() + " of " + dh.inputList.count().ToString() + ")";
+        }
+
+    private void setCurrentImageStatusLabel()
+    {
+        if (dh.inputList.getList().ElementAt(dh.inputList.Current).Status.Equals("selected"))
+        {
+
+            labelCurrentImageStatus.Foreground = Brushes.Green;
+            labelCurrentImageStatus.Content = "SELECTED";
+        }
+        else if (dh.inputList.getList().ElementAt(dh.inputList.Current).Status.Equals("discarded"))
+        {
+            labelCurrentImageStatus.Foreground = Brushes.Red;
+            labelCurrentImageStatus.Content = "DISCARDED";
+        }
+        else
+        {
+            labelCurrentImageStatus.Foreground = Brushes.DarkGray;
+            labelCurrentImageStatus.Content = "UNRATED";
+        }
+    }
+    
+    private void checkInputListBounds()
+    {
+        //check prev button
+        if (dh.inputList.count() > 0 && (Int32)dh.inputList.Current != 0)
+        {
+            buttonPrevImage.IsEnabled = true;
+        }
+        else
+        {
+            buttonPrevImage.IsEnabled = false;
+        }
+
+        //check next button
+        if (dh.inputList.count() > 0
+                && (Int32)dh.inputList.Current < dh.inputList.count() - 1
+            )
+        {
+            buttonNextImage.IsEnabled = true;
+        }
+        else
+        {
+            buttonNextImage.IsEnabled = false;
+        }
+
+    }
+    
+        //delegate void SetTextCallback(string text);
+        public void onSeparateFilesProgress(DirectoryHandler dh, ProgressEventArgs e)
+        {
+            progressBarOutputProcess.Value++;
+            progressBarOutputProcess.UpdateLayout();
+            System.Windows.Forms.Application.DoEvents();
+        }
+
+        public void onSeparateFilesFinish(DirectoryHandler dh, ProgressEventArgs e)
+        {
+            progressBarOutputProcess.Value++;
+            progressBarOutputProcess.UpdateLayout();
+
+            System.Windows.Forms.MessageBox.Show("Process finished!", "Descartes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Collections.Hashtable stats = dh.getProcessStats();
+            labelSummaryTotalFiles.Content = stats["input"];
+            labelSummarySelectedFiles.Content = stats["selected"];
+            labelSummaryDiscardedFiles.Content = stats["discarded"];
+            labelSummaryIgnoredFiles.Content = stats["ignored"];
+            tabItemInput.IsEnabled = false;
+            tabItemProcess.IsEnabled = false;
+            tabItemOutput.IsEnabled = false;
+            tabItemEnd.IsEnabled = true;
+            tabItemEnd.Focus();
+        }
+        
+        
+        private void dyn_resize()
+        {
+            if (this.WindowState == System.Windows.WindowState.Maximized)
+            {
+                tabControlMain.Width = Screen.PrimaryScreen.WorkingArea.Width - 20;
+                tabControlMain.Height = Screen.PrimaryScreen.WorkingArea.Height - 30;
+            }
+            else {
+                tabControlMain.Width = this.RestoreBounds.Width - 20;
+                tabControlMain.Height = this.RestoreBounds.Height - 30;
+            }
+            
+            
+            List<Grid> grids = new List<Grid>();
+            grids.Add(gridTabInput);
+            grids.Add(gridTabProcess);
+            grids.Add(gridTabOutput);
+            grids.Add(gridTabEnd);
+
+            grids.ForEach(x =>
+            {
+                x.Width = tabControlMain.ActualWidth - 5;
+                x.Height = tabControlMain.ActualHeight - tabItemInput.ActualHeight - 5;
+            });
+
+            this.UpdateLayout();
+        }
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -622,12 +1207,16 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton buttonBrowseSelectedFolder;
     private javax.swing.JToggleButton buttonDiscard;
     private javax.swing.JButton buttonEndProcess;
+    private javax.swing.JButton buttonExitNow;
     private javax.swing.JButton buttonNextImage;
     private javax.swing.JButton buttonNextStep;
     private javax.swing.JButton buttonPrevImage;
     private javax.swing.JButton buttonReloadFilesFound;
     private javax.swing.JButton buttonRestart;
     private javax.swing.JToggleButton buttonSelect;
+    private javax.swing.JButton buttonStartAgainWithDiscarded;
+    private javax.swing.JButton buttonStartAgainWithNew;
+    private javax.swing.JButton buttonStartAgainWithSelected;
     private javax.swing.JButton buttonStartProcess;
     private javax.swing.JComboBox comboBoxDiscardedImagesMoveCopy;
     private javax.swing.JComboBox comboBoxDiscardedImagesOutputFormat;
@@ -636,27 +1225,17 @@ public class MainWindow extends javax.swing.JFrame {
     private descartesj.ImageViewer imageCurrent;
     private descartesj.ImageViewer imageNext;
     private descartesj.ImageViewer imagePrev;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel4;
@@ -679,6 +1258,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel labelNumDiscardedImages;
     private javax.swing.JLabel labelNumFiles;
     private javax.swing.JLabel labelNumSelectedImages;
+    private javax.swing.JLabel labelSummaryDiscardedFiles;
+    private javax.swing.JLabel labelSummaryIgnoredFiles;
+    private javax.swing.JLabel labelSummaryOpenDiscardedFolder;
+    private javax.swing.JLabel labelSummaryOpenInputFolder;
+    private javax.swing.JLabel labelSummaryOpenSelectedFolder;
+    private javax.swing.JLabel labelSummarySelectedFiles;
+    private javax.swing.JLabel labelSummaryTotalFiles;
     private javax.swing.JList listViewFilesFound;
     private javax.swing.JProgressBar progressBarOutputProcess;
     private javax.swing.JTabbedPane tabControlMain;

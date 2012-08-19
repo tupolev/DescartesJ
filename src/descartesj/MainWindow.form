@@ -7,6 +7,10 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="ancestorResized" listener="java.awt.event.HierarchyBoundsListener" parameters="java.awt.event.HierarchyEvent" handler="formAncestorResized"/>
+    <EventHandler event="windowStateChanged" listener="java.awt.event.WindowStateListener" parameters="java.awt.event.WindowEvent" handler="formWindowStateChanged"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -155,31 +159,49 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="c:\u005c" containsInvalidXMLChars="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textBoxInputFolderActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonBrowse">
               <Properties>
                 <Property name="text" type="java.lang.String" value="..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBrowseActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="textBoxOutputSelectedFolder">
               <Properties>
                 <Property name="text" type="java.lang.String" value="c:\u005c" containsInvalidXMLChars="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textBoxOutputSelectedFolderActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="textBoxOutputDiscardedFolder">
               <Properties>
                 <Property name="text" type="java.lang.String" value="c:\u005c" containsInvalidXMLChars="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textBoxOutputDiscardedFolderActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonBrowseSelectedFolder">
               <Properties>
                 <Property name="text" type="java.lang.String" value="..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBrowseSelectedFolderActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonBrowseDiscardedFolder">
               <Properties>
                 <Property name="text" type="java.lang.String" value="..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBrowseDiscardedFolderActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <AuxValues>
@@ -212,11 +234,17 @@
                 <Property name="text" type="java.lang.String" value="Reload"/>
                 <Property name="name" type="java.lang.String" value="buttonReloadFilesFound" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReloadFilesFoundActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonStartProcess">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Start process"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStartProcessActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -255,22 +283,22 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="imagePrev" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="buttonRestart" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="buttonPrevImage" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="buttonPrevImage" min="-2" pref="164" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="buttonDiscard" min="-2" pref="72" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                                      <EmptySpace pref="46" max="32767" attributes="0"/>
                                       <Component id="labelCurrentImageStatus" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                       <Component id="buttonSelect" min="-2" pref="75" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="buttonNextImage" min="-2" pref="114" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="imageCurrent" max="32767" attributes="0"/>
@@ -282,12 +310,12 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="imageNext" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="buttonNextStep" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonNextStep" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -306,31 +334,28 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="imagePrev" min="-2" max="-2" attributes="0"/>
                                   <Component id="imageCurrent" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="imageNext" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="362" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="buttonDiscard" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="buttonSelect" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="labelCurrentImageStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="buttonPrevImage" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
+                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                      <Component id="buttonNextImage" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="buttonSelect" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="buttonRestart" max="32767" attributes="0"/>
-                                  <Component id="buttonNextImage" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="buttonNextStep" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="buttonNextStep" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                      <Component id="buttonDiscard" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="labelCurrentImageStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="buttonPrevImage" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="buttonRestart" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -388,11 +413,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;&lt; Restart"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRestartActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonNextStep">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Next step &gt;&gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNextStepActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="buttonDiscard">
               <Properties>
@@ -401,6 +432,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Select"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDiscardActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="buttonSelect">
               <Properties>
@@ -409,6 +443,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Discard"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSelectActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="labelCurrentImageStatus">
               <Properties>
@@ -461,11 +498,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt; Prev. Image"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPrevImageActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="buttonNextImage">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Next image &gt;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNextImageActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -688,6 +731,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="End process"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEndProcessActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JProgressBar" name="progressBarOutputProcess">
             </Component>
@@ -729,39 +775,37 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton9" max="32767" attributes="0"/>
-                              <Component id="jButton10" pref="295" max="32767" attributes="0"/>
-                              <Component id="jButton11" max="32767" attributes="0"/>
-                              <Component id="jButton12" max="32767" attributes="0"/>
+                              <Component id="buttonStartAgainWithSelected" max="32767" attributes="0"/>
+                              <Component id="buttonStartAgainWithDiscarded" pref="295" max="32767" attributes="0"/>
+                              <Component id="buttonStartAgainWithNew" max="32767" attributes="0"/>
+                              <Component id="buttonExitNow" max="32767" attributes="0"/>
                               <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelSummaryTotalFiles" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelSummarySelectedFiles" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelSummaryDiscardedFiles" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelSummaryIgnoredFiles" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSummaryOpenInputFolder" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSummaryOpenSelectedFolder" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSummaryOpenDiscardedFolder" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="600" max="32767" attributes="0"/>
                   </Group>
@@ -774,128 +818,159 @@
                       <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSummaryTotalFiles" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSummarySelectedFiles" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSummaryDiscardedFiles" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSummaryIgnoredFiles" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="labelSummaryOpenInputFolder" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="211" max="32767" attributes="0"/>
+                      <Component id="labelSummaryOpenSelectedFolder" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="labelSummaryOpenDiscardedFolder" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="49" max="32767" attributes="0"/>
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonStartAgainWithSelected" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton10" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonStartAgainWithDiscarded" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton11" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonStartAgainWithNew" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton12" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="buttonExitNow" min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="buttonStartAgainWithSelected">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton9"/>
+                <Property name="text" type="java.lang.String" value="Start again, using selected files as input"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStartAgainWithSelectedActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton10">
+            <Component class="javax.swing.JButton" name="buttonStartAgainWithDiscarded">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton10"/>
+                <Property name="text" type="java.lang.String" value="Start again, using discarded files as input"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStartAgainWithDiscardedActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton11">
+            <Component class="javax.swing.JButton" name="buttonStartAgainWithNew">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton11"/>
+                <Property name="text" type="java.lang.String" value="Start again, using a new input folder"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStartAgainWithNewActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton12">
+            <Component class="javax.swing.JButton" name="buttonExitNow">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jButton12"/>
+                <Property name="text" type="java.lang.String" value="Exit now"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonExitNowActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel16"/>
+                <Property name="text" type="java.lang.String" value="What do you want to do next?"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel17">
+            <Component class="javax.swing.JLabel" name="labelSummaryTotalFiles">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel17"/>
+                <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel18">
+            <Component class="javax.swing.JLabel" name="labelSummarySelectedFiles">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel18"/>
+                <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel19">
+            <Component class="javax.swing.JLabel" name="labelSummaryDiscardedFiles">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel19"/>
+                <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel20">
+            <Component class="javax.swing.JLabel" name="labelSummaryIgnoredFiles">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel20"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel21">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel21"/>
+                <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel22"/>
+                <Property name="text" type="java.lang.String" value="total files"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel23">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel23"/>
+                <Property name="text" type="java.lang.String" value="selected files"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel24">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel24"/>
+                <Property name="text" type="java.lang.String" value="discarded files"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel25">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel25"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel26">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel26"/>
+                <Property name="text" type="java.lang.String" value="ignored files"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel27">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel27"/>
+                <Property name="text" type="java.lang.String" value="Summary"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelSummaryOpenInputFolder">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Open input folder"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelSummaryOpenInputFolderMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelSummaryOpenSelectedFolder">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Open selected images folder"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelSummaryOpenSelectedFolderMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelSummaryOpenDiscardedFolder">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Open discarded images folder"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="labelSummaryOpenDiscardedFolderMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
