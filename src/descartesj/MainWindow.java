@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 package descartesj;
+import java.nio.file.Files;
 import javax.swing.*;
+import java.io.*;
 
 /**
  *
@@ -737,50 +739,52 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonBrowseActionPerformed
 
     private void buttonReloadFilesFoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadFilesFoundActionPerformed
-        listViewFilesFound.Items.Clear();
-            progressBarLoading.Visibility = System.Windows.Visibility.Visible;
-            labelNumFiles.Content = "Loading";
-            dh = new DirectoryHandler(textBoxInputFolder.Text);
-            labelNumFiles.Content = dh.fillInputList();
-            foreach (Image item in dh.inputList.getList())
+        listViewFilesFound.removeAll();
+            //progressBarLoading.Visibility = System.Windows.Visibility.Visible;
+            labelNumFiles.setText("Loading");
+            dh = new DirectoryHandler(textBoxInputFolder.getText());
+            labelNumFiles.setText(dh.fillInputList().toString());
+            DefaultListModel model = new DefaultListModel();
+            listViewFilesFound.setModel(model);
+            for (DImage item : dh.inputList.getList())
             {
 
                 String extensions = "";
-                foreach (descartes.File file in item.getFiles())
+                for (DFile file : item.getFiles())
                 {
-                    extensions += "(" + file.Ext + ")";
+                    extensions += "(" + file.getExt() + ")";
                 }
-
-                listViewFilesFound.Items.Add(
-                        item.getFileTitle() + " " + extensions
-                    );
+                
+               model.add(0, item.getFileTitle() + " " + extensions);
+               
+                    
             }
 
-            progressBarLoading.Visibility = System.Windows.Visibility.Hidden;
+            //progressBarLoading.Visibility = System.Windows.Visibility.Hidden;
     }//GEN-LAST:event_buttonReloadFilesFoundActionPerformed
 
     private void textBoxInputFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxInputFolderActionPerformed
-        if (Directory.Exists(textBoxInputFolder.Text))
-            {
-                textBoxInputFolder.Background = Brushes.LightGreen;
-                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = true;
-            }
-            else
-            {
-                textBoxInputFolder.Background = Brushes.LightCoral;
-                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = false;
-            }
+        File file = new File(textBoxInputFolder.getText());
+        if (java.nio.file.Files.exists(file.toPath() ,null)){
+            //textBoxInputFolder.Background = Brushes.LightGreen;
+            if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(true);
+        }
+        else
+        {
+            //textBoxInputFolder.Background = Brushes.LightCoral;
+            if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(false);
+        }
     }//GEN-LAST:event_textBoxInputFolderActionPerformed
 
     private void buttonStartProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartProcessActionPerformed
-        dh.inputList.Current = 0;
-            imagePrev.Source = unavailableImage;
+        dh.inputList.setCurrent(0);
+            imagePrev.setImage(unavailableImage) ;
 
-            dh.OutputSelectedPath = textBoxOutputSelectedFolder.Text;
-            dh.OutputDiscardedPath = textBoxOutputDiscardedFolder.Text;
+            dh.setOutputSelectedPath(textBoxOutputSelectedFolder.getText());
+            dh.setOutputDiscardedPath(textBoxOutputDiscardedFolder.getText());
 
-            String pathCurr = dh.getImagePathForItem(dh.inputList.Current, ".JPG");
-            imageCurrent.Source = System.IO.File.Exists(pathCurr) ? new BitmapImage(new Uri(pathCurr)) : unavailableImage;
+            String pathCurr = dh.getImagePathForItem(dh.inputList.getCurrent(), ".JPG");
+            imageCurrent.setSource();//System.IO.File.Exists(pathCurr) ? new BitmapImage(new Uri(pathCurr)) : unavailableImage;
             labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
             setCurrentImageStatusLabel();
 
