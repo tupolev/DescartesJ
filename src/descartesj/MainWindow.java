@@ -6,6 +6,10 @@ package descartesj;
 import java.nio.file.Files;
 import javax.swing.*;
 import java.io.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  *
@@ -23,9 +27,9 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         app_path = DirectoryHandler.getAppPath();
-        unavailableImage = new ImageIcon(
-                app_path + java.io.File.pathSeparator + "images" + java.io.File.pathSeparator + "no.gif"
-                );
+        unavailableImage = new ImageIcon(app_path + java.io.File.pathSeparator + "images" + java.io.File.pathSeparator + "no.gif" );
+                //app_path + java.io.File.pathSeparator + "images" + java.io.File.pathSeparator + "no.gif"
+                
     }
 
     /**
@@ -38,7 +42,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         tabControlMain = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        tabItemInput = new javax.swing.JPanel();
         textBoxInputFolder = new javax.swing.JTextField();
         buttonBrowse = new javax.swing.JButton();
         textBoxOutputSelectedFolder = new javax.swing.JTextField();
@@ -53,9 +57,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonStartProcess = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        imageNext = new descartesj.ImageViewer();
-        imageCurrent = new descartesj.ImageViewer();
+        tabItemProcess = new javax.swing.JPanel();
         buttonRestart = new javax.swing.JButton();
         buttonNextStep = new javax.swing.JButton();
         buttonDiscard = new javax.swing.JToggleButton();
@@ -65,14 +67,16 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         labelCurrentImagePositionInList = new javax.swing.JLabel();
-        imagePrev = new descartesj.ImageViewer();
         buttonPrevImage = new javax.swing.JButton();
         buttonNextImage = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        imagePrev = new javax.swing.JLabel();
+        imageNext = new javax.swing.JLabel();
+        imageCurrent = new javax.swing.JLabel();
+        tabItemOutput = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        listViewSelectedImages = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
+        listViewDiscardedImages = new javax.swing.JList();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -87,7 +91,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         labelNumSelectedImages = new javax.swing.JLabel();
         labelNumDiscardedImages = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        tabItemEnd = new javax.swing.JPanel();
         buttonStartAgainWithSelected = new javax.swing.JButton();
         buttonStartAgainWithDiscarded = new javax.swing.JButton();
         buttonStartAgainWithNew = new javax.swing.JButton();
@@ -188,75 +192,75 @@ public class MainWindow extends javax.swing.JFrame {
 
                     jLabel28.setText("Files found");
 
-                    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-                    jPanel2.setLayout(jPanel2Layout);
-                    jPanel2Layout.setHorizontalGroup(
-                        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
+                    javax.swing.GroupLayout tabItemInputLayout = new javax.swing.GroupLayout(tabItemInput);
+                    tabItemInput.setLayout(tabItemInputLayout);
+                    tabItemInputLayout.setHorizontalGroup(
+                        tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(tabItemInputLayout.createSequentialGroup()
                             .addGap(21, 21, 21)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(tabItemInputLayout.createSequentialGroup()
                                     .addComponent(jLabel28)
                                     .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(tabItemInputLayout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(tabItemInputLayout.createSequentialGroup()
+                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(tabItemInputLayout.createSequentialGroup()
                                             .addComponent(textBoxInputFolder)
                                             .addGap(45, 45, 45)
                                             .addComponent(buttonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(tabItemInputLayout.createSequentialGroup()
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
                                             .addGap(18, 18, 18)
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(tabItemInputLayout.createSequentialGroup()
                                                     .addComponent(labelNumFiles)
                                                     .addGap(43, 43, 43)
                                                     .addComponent(jLabel2)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(buttonReloadFilesFound))
-                                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(tabItemInputLayout.createSequentialGroup()
+                                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(textBoxOutputDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(textBoxOutputSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemInputLayout.createSequentialGroup()
                                                             .addGap(80, 80, 80)
                                                             .addComponent(buttonStartProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                     .addGap(18, 18, 18)
-                                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(buttonBrowseSelectedFolder, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                                                         .addComponent(buttonBrowseDiscardedFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                                     .addGap(30, 30, 30))))
                     );
-                    jPanel2Layout.setVerticalGroup(
-                        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
+                    tabItemInputLayout.setVerticalGroup(
+                        tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(tabItemInputLayout.createSequentialGroup()
                             .addContainerGap(35, Short.MAX_VALUE)
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(textBoxInputFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(buttonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(31, 31, 31)
                             .addComponent(jLabel28)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(tabItemInputLayout.createSequentialGroup()
+                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(labelNumFiles)
                                         .addComponent(jLabel2)
                                         .addComponent(buttonReloadFilesFound, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(textBoxOutputSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(buttonBrowseSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(tabItemInputLayout.createSequentialGroup()
                                             .addGap(18, 18, 18)
                                             .addComponent(textBoxOutputDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemInputLayout.createSequentialGroup()
                                             .addGap(18, 18, 18)
                                             .addComponent(buttonBrowseDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGap(71, 71, 71)
@@ -266,33 +270,9 @@ public class MainWindow extends javax.swing.JFrame {
                             .addContainerGap(35, Short.MAX_VALUE))
                     );
 
-                    tabControlMain.addTab("1-The input", jPanel2);
+                    tabControlMain.addTab("1-The input", tabItemInput);
 
-                    imageNext.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-                    javax.swing.GroupLayout imageNextLayout = new javax.swing.GroupLayout(imageNext);
-                    imageNext.setLayout(imageNextLayout);
-                    imageNextLayout.setHorizontalGroup(
-                        imageNextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 152, Short.MAX_VALUE)
-                    );
-                    imageNextLayout.setVerticalGroup(
-                        imageNextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 108, Short.MAX_VALUE)
-                    );
-
-                    imageCurrent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-                    javax.swing.GroupLayout imageCurrentLayout = new javax.swing.GroupLayout(imageCurrent);
-                    imageCurrent.setLayout(imageCurrentLayout);
-                    imageCurrentLayout.setHorizontalGroup(
-                        imageCurrentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                    );
-                    imageCurrentLayout.setVerticalGroup(
-                        imageCurrentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 440, Short.MAX_VALUE)
-                    );
+                    tabItemProcess.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
                     buttonRestart.setText("<< Restart");
                     buttonRestart.addActionListener(new java.awt.event.ActionListener() {
@@ -334,19 +314,6 @@ public class MainWindow extends javax.swing.JFrame {
 
                     labelCurrentImagePositionInList.setText("(0 of 0)");
 
-                    imagePrev.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-                    javax.swing.GroupLayout imagePrevLayout = new javax.swing.GroupLayout(imagePrev);
-                    imagePrev.setLayout(imagePrevLayout);
-                    imagePrevLayout.setHorizontalGroup(
-                        imagePrevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 152, Short.MAX_VALUE)
-                    );
-                    imagePrevLayout.setVerticalGroup(
-                        imagePrevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 106, Short.MAX_VALUE)
-                    );
-
                     buttonPrevImage.setText("< Prev. Image");
                     buttonPrevImage.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,88 +328,91 @@ public class MainWindow extends javax.swing.JFrame {
                         }
                     });
 
-                    javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-                    jPanel3.setLayout(jPanel3Layout);
-                    jPanel3Layout.setHorizontalGroup(
-                        jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
+                    imagePrev.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+                    imageNext.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+                    imageCurrent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+                    javax.swing.GroupLayout tabItemProcessLayout = new javax.swing.GroupLayout(tabItemProcess);
+                    tabItemProcess.setLayout(tabItemProcessLayout);
+                    tabItemProcessLayout.setHorizontalGroup(
+                        tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
+                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(tabItemProcessLayout.createSequentialGroup()
                                     .addContainerGap()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel6)
                                     .addGap(61, 61, 61)
                                     .addComponent(labelCurrentImagePositionInList, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addContainerGap()
-                                            .addComponent(buttonRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
+                                    .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(buttonRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(tabItemProcessLayout.createSequentialGroup()
                                             .addComponent(buttonPrevImage, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
                                             .addComponent(buttonDiscard, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                                             .addComponent(labelCurrentImageStatus)
                                             .addGap(31, 31, 31)
                                             .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
                                             .addComponent(buttonNextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addContainerGap()))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(buttonNextStep)
-                                    .addContainerGap())))
+                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(tabItemProcessLayout.createSequentialGroup()
+                                    .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(tabItemProcessLayout.createSequentialGroup()
+                                            .addGap(96, 96, 96)
+                                            .addComponent(jLabel5))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(buttonNextStep)))
+                                    .addContainerGap())
+                                .addGroup(tabItemProcessLayout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     );
-                    jPanel3Layout.setVerticalGroup(
-                        jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    tabItemProcessLayout.setVerticalGroup(
+                        tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
                             .addGap(20, 20, 20)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel5)
                                 .addComponent(labelCurrentImagePositionInList)
                                 .addComponent(jLabel6))
                             .addGap(18, 18, 18)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(imageCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(buttonNextImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(buttonNextStep, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(buttonDiscard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(labelCurrentImageStatus))
-                                        .addComponent(buttonPrevImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(buttonRestart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(buttonNextImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(buttonNextStep, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(buttonDiscard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labelCurrentImageStatus))
+                                .addComponent(buttonPrevImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonRestart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap())
                     );
 
-                    tabControlMain.addTab("2-The process", jPanel3);
+                    tabControlMain.addTab("2-The process", tabItemProcess);
 
-                    jList2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 0)));
-                    jScrollPane2.setViewportView(jList2);
+                    listViewSelectedImages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 0)));
+                    jScrollPane2.setViewportView(listViewSelectedImages);
 
-                    jList3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-                    jScrollPane3.setViewportView(jList3);
+                    listViewDiscardedImages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+                    jScrollPane3.setViewportView(listViewDiscardedImages);
 
                     jLabel8.setText("What to do with these images?");
 
@@ -475,82 +445,82 @@ public class MainWindow extends javax.swing.JFrame {
 
                     labelNumDiscardedImages.setText("(Collecting data)");
 
-                    javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-                    jPanel4.setLayout(jPanel4Layout);
-                    jPanel4Layout.setHorizontalGroup(
-                        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
+                    javax.swing.GroupLayout tabItemOutputLayout = new javax.swing.GroupLayout(tabItemOutput);
+                    tabItemOutput.setLayout(tabItemOutputLayout);
+                    tabItemOutputLayout.setHorizontalGroup(
+                        tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(tabItemOutputLayout.createSequentialGroup()
                             .addGap(70, 70, 70)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(tabItemOutputLayout.createSequentialGroup()
                                     .addGap(0, 61, Short.MAX_VALUE)
                                     .addComponent(buttonEndProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(progressBarOutputProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(tabItemOutputLayout.createSequentialGroup()
                                     .addGap(60, 60, 60)
-                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(tabItemOutputLayout.createSequentialGroup()
                                             .addComponent(jLabel8)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(comboBoxSelectedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel12)
-                                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(labelNumSelectedImages, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGroup(tabItemOutputLayout.createSequentialGroup()
                                                     .addComponent(jLabel9)
                                                     .addGap(146, 146, 146)
                                                     .addComponent(comboBoxSelectedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel13)
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(comboBoxDiscardedImagesMoveCopy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(comboBoxDiscardedImagesOutputFormat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel10)
                                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel11)
                                                 .addComponent(labelNumDiscardedImages))))))
                             .addGap(134, 134, 134))
                     );
-                    jPanel4Layout.setVerticalGroup(
-                        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
+                    tabItemOutputLayout.setVerticalGroup(
+                        tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(tabItemOutputLayout.createSequentialGroup()
                             .addGap(25, 25, 25)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel12)
                                 .addComponent(jLabel13))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelNumSelectedImages)
                                 .addComponent(labelNumDiscardedImages))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                                 .addComponent(jScrollPane2))
                             .addGap(31, 31, 31)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
                                 .addComponent(jLabel10)
                                 .addComponent(comboBoxSelectedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(comboBoxDiscardedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(21, 21, 21)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel9)
                                 .addComponent(jLabel11)
                                 .addComponent(comboBoxSelectedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(comboBoxDiscardedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(buttonEndProcess, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                                 .addComponent(progressBarOutputProcess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGap(39, 39, 39))
                     );
 
-                    tabControlMain.addTab("3-The output", jPanel4);
+                    tabControlMain.addTab("3-The output", tabItemOutput);
 
                     buttonStartAgainWithSelected.setText("Start again, using selected files as input");
                     buttonStartAgainWithSelected.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -625,33 +595,33 @@ public class MainWindow extends javax.swing.JFrame {
                         }
                     });
 
-                    javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-                    jPanel5.setLayout(jPanel5Layout);
-                    jPanel5Layout.setHorizontalGroup(
-                        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
+                    javax.swing.GroupLayout tabItemEndLayout = new javax.swing.GroupLayout(tabItemEnd);
+                    tabItemEnd.setLayout(tabItemEndLayout);
+                    tabItemEndLayout.setHorizontalGroup(
+                        tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(tabItemEndLayout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(buttonStartAgainWithSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(buttonStartAgainWithDiscarded, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                                     .addComponent(buttonStartAgainWithNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(buttonExitNow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel16)
                                     .addComponent(jSeparator1))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(tabItemEndLayout.createSequentialGroup()
                                     .addComponent(labelSummaryTotalFiles)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel22))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(tabItemEndLayout.createSequentialGroup()
                                     .addComponent(labelSummarySelectedFiles)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel23))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(tabItemEndLayout.createSequentialGroup()
                                     .addComponent(labelSummaryDiscardedFiles)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel24))
-                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(tabItemEndLayout.createSequentialGroup()
                                     .addComponent(labelSummaryIgnoredFiles)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel25))
@@ -661,25 +631,25 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(labelSummaryOpenDiscardedFolder))
                             .addContainerGap(600, Short.MAX_VALUE))
                     );
-                    jPanel5Layout.setVerticalGroup(
-                        jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    tabItemEndLayout.setVerticalGroup(
+                        tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemEndLayout.createSequentialGroup()
                             .addGap(28, 28, 28)
                             .addComponent(jLabel27)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelSummaryTotalFiles)
                                 .addComponent(jLabel22))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelSummarySelectedFiles)
                                 .addComponent(jLabel23))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelSummaryDiscardedFiles)
                                 .addComponent(jLabel24))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelSummaryIgnoredFiles)
                                 .addComponent(jLabel25))
                             .addGap(43, 43, 43)
@@ -703,7 +673,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGap(63, 63, 63))
                     );
 
-                    tabControlMain.addTab("4-The end", jPanel5);
+                    tabControlMain.addTab("4-The end", tabItemEnd);
 
                     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                     getContentPane().setLayout(layout);
@@ -746,7 +716,7 @@ public class MainWindow extends javax.swing.JFrame {
             labelNumFiles.setText(dh.fillInputList().toString());
             DefaultListModel model = new DefaultListModel();
             listViewFilesFound.setModel(model);
-            for (DImage item : dh.inputList.getList())
+            for (DImage item : dh.getInputList().getList())
             {
 
                 String extensions = "";
@@ -777,223 +747,235 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_textBoxInputFolderActionPerformed
 
     private void buttonStartProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartProcessActionPerformed
-        dh.inputList.setCurrent(0);
-            imagePrev.setImage(unavailableImage) ;
+        dh.getInputList().setCurrent(0);
+        descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+        dh.setOutputSelectedPath(textBoxOutputSelectedFolder.getText());
+        dh.setOutputDiscardedPath(textBoxOutputDiscardedFolder.getText());
 
-            dh.setOutputSelectedPath(textBoxOutputSelectedFolder.getText());
-            dh.setOutputDiscardedPath(textBoxOutputDiscardedFolder.getText());
+        String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
+        if (java.nio.file.Files.exists((new java.io.File(pathCurr)).toPath(), null))
+            descartesj.Utils.setIconImage(pathCurr, imageCurrent);
+        else
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
 
-            String pathCurr = dh.getImagePathForItem(dh.inputList.getCurrent(), ".JPG");
-            imageCurrent.setSource();//System.IO.File.Exists(pathCurr) ? new BitmapImage(new Uri(pathCurr)) : unavailableImage;
-            labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
-            setCurrentImageStatusLabel();
+        //labelCurrentImageFilename.setContent(pathCurr);
+        setCurrentImageStatusLabel();
 
-            String pathNext = dh.getImagePathForItem(dh.inputList.Current + 1, ".JPG");
-            BitmapImage bmp = System.IO.File.Exists(pathNext) ? new BitmapImage(new Uri(pathNext)) : unavailableImage;
-            imageNext.Source = bmp;
-            labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
-            labelCurrentImagePositionInList.Content = getCurrentImagePositionCaption();
-            tabItemProcess.IsEnabled = true;
-            tabItemOutput.IsEnabled = true;
-            checkInputListBounds();
-            tabItemProcess.Focus();
+        String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
+        if (java.nio.file.Files.exists((new java.io.File(pathNext)).toPath(), null))
+            descartesj.Utils.setIconImage(pathNext, imageNext);
+        else
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
+
+        //labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
+        labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
+        tabItemProcess.setEnabled(true);
+        tabItemOutput.setEnabled(true);
+        checkInputListBounds();
+        tabControlMain.setSelectedComponent(tabItemProcess);
     }//GEN-LAST:event_buttonStartProcessActionPerformed
 
     private void buttonPrevImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrevImageActionPerformed
-        System.Windows.Input.Cursor oldCursor = this.Cursor;
-            this.Cursor = System.Windows.Input.Cursors.AppStarting;
-            if ((Int32)dh.inputList.Current < dh.inputList.count()
-                && (Int32)dh.inputList.Current > 0)
-            {
-                dh.inputList.Current--;
+        //System.Windows.Input.Cursor oldCursor = this.Cursor;
+        //this.Cursor = System.Windows.Input.Cursors.AppStarting;
+        if ((dh.getInputList().getCurrent() < dh.getInputList().count()) && (dh.getInputList().getCurrent() > 0))
+        {
+            dh.getInputList().setCurrent(dh.getInputList().getCurrent()-1);
 
-                String pathPrev = dh.getImagePathForItem(dh.inputList.Current - 1, ".JPG");
-                prevImage = null;
-                prevImage = (System.IO.File.Exists(pathPrev)) ? new BitmapImage(new Uri(pathPrev)) : unavailableImage;
-                imagePrev.Source = prevImage;
-                prevImage = null;
-                labelPrevImageFilename.Content = System.IO.Path.GetFileName(pathPrev);
 
-                String pathCurr = dh.getImagePathForItem(dh.inputList.Current, ".JPG");
-                currentImage = null;
-                currentImage = (System.IO.File.Exists(pathCurr)) ? new BitmapImage(new Uri(pathCurr)) : unavailableImage;
-                imageCurrent.Source = currentImage;
-                currentImage = null;
-                labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
-                setCurrentImageStatusLabel();
+            String pathPrev = dh.getImagePathForItem(dh.getInputList().getCurrent() - 1, ".JPG");
+            if (java.nio.file.Files.exists((new java.io.File(pathPrev)).toPath(), null))
+                descartesj.Utils.setIconImage(pathPrev, imagePrev);
+            else    
+                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+            //labelPrevImageFilename.Content = System.IO.Path.GetFileName(pathPrev);
 
-                String pathNext = dh.getImagePathForItem(dh.inputList.Current + 1, ".JPG");
-                nextImage = null;
-                nextImage = (System.IO.File.Exists(pathNext)) ? new BitmapImage(new Uri(pathNext)) : unavailableImage;
-                imageNext.Source = nextImage;
-                prevImage = null;
-                labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
-            }
+            String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
+            if (java.nio.file.Files.exists((new java.io.File(pathCurr)).toPath(), null))
+                descartesj.Utils.setIconImage(pathCurr, imageCurrent);
             else
-            {
-                imagePrev.Source = unavailableImage;
-            }
-            labelCurrentImagePositionInList.Content = getCurrentImagePositionCaption();
-            checkInputListBounds();
-            this.Cursor = oldCursor;
+                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
+
+
+            //labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
+            setCurrentImageStatusLabel();
+
+            String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
+            if (java.nio.file.Files.exists((new java.io.File(pathNext)).toPath(), null))
+                descartesj.Utils.setIconImage(pathNext, imageNext);
+            else
+                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
+
+            //labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
+        }
+        else
+        {
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+        }
+        labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
+        checkInputListBounds();
+        //this.Cursor = oldCursor;
     }//GEN-LAST:event_buttonPrevImageActionPerformed
 
     private void buttonNextImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextImageActionPerformed
-        System.Windows.Input.Cursor oldCursor = this.Cursor;
-            this.Cursor = System.Windows.Input.Cursors.AppStarting;
+        //System.Windows.Input.Cursor oldCursor = this.Cursor;
+        //this.Cursor = System.Windows.Input.Cursors.AppStarting;
 
-            if ((Int32)dh.inputList.Current < dh.inputList.count()
-                && (Int32)dh.inputList.Current >= 0)
-            {
-                dh.inputList.Current++;
+        if (dh.getInputList().getCurrent() < dh.getInputList().count()
+            && dh.getInputList().getCurrent() >= 0)
+        {
+            dh.getInputList().setCurrent(dh.getInputList().getCurrent()+1);
 
-                String pathPrev = dh.getImagePathForItem(dh.inputList.Current - 1, ".JPG");
-                prevImage = null;
-                prevImage = (System.IO.File.Exists(pathPrev)) ? new BitmapImage(new Uri(pathPrev)) : unavailableImage;
-                imagePrev.Source = prevImage;
-                prevImage = null;
-                labelPrevImageFilename.Content = System.IO.Path.GetFileName(pathPrev);
+            String pathPrev = dh.getImagePathForItem(dh.getInputList().getCurrent() - 1, ".JPG");
+            if (java.nio.file.Files.exists((new java.io.File(pathPrev)).toPath(), null))
+                descartesj.Utils.setIconImage(pathPrev, imagePrev);
+            else    
+                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+                //labelPrevImageFilename.Content = System.IO.Path.GetFileName(pathPrev);
 
-                String pathCurr = dh.getImagePathForItem(dh.inputList.Current, ".JPG");
-                currentImage = null;
-                currentImage = (System.IO.File.Exists(pathCurr)) ? new BitmapImage(new Uri(pathCurr)) : unavailableImage;
-                imageCurrent.Source = currentImage;
-                currentImage = null;
-                labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
-                setCurrentImageStatusLabel();
-
-                String pathNext = dh.getImagePathForItem(dh.inputList.Current + 1, ".JPG");
-                nextImage = null;
-                nextImage = (System.IO.File.Exists(pathNext)) ? new BitmapImage(new Uri(pathNext)) : unavailableImage;
-                imageNext.Source = nextImage;
-                prevImage = null;
-                labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
-            }
+            String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
+            if (java.nio.file.Files.exists((new java.io.File(pathCurr)).toPath(), null))
+                descartesj.Utils.setIconImage(pathCurr, imageCurrent);
             else
-            {
-                imagePrev.Source = unavailableImage;
-            }
-            labelCurrentImagePositionInList.Content = getCurrentImagePositionCaption();
-            checkInputListBounds();
-            this.Cursor = oldCursor;
+                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
+            //labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
+            setCurrentImageStatusLabel();
+
+            String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
+            if (java.nio.file.Files.exists((new java.io.File(pathNext)).toPath(), null))
+                descartesj.Utils.setIconImage(pathNext, imageNext);
+            else
+                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
+            //labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
+        }
+        else
+        {
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+        }
+        labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
+        checkInputListBounds();
+        //this.Cursor = oldCursor;
     }//GEN-LAST:event_buttonNextImageActionPerformed
 
     private void buttonDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDiscardActionPerformed
-        dh.inputList.selectCurrent();
-            dh.removeFromDiscardedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
-            dh.removeFromSelectedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
-            dh.addToSelectedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
+        dh.getInputList().selectCurrent();
+            dh.removeFromDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+            dh.removeFromSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+            dh.addToSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
             setCurrentImageStatusLabel();
     }//GEN-LAST:event_buttonDiscardActionPerformed
 
     private void buttonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectActionPerformed
-        dh.inputList.discardCurrent();
-            dh.removeFromSelectedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
-            dh.removeFromDiscardedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
-            dh.addToDiscardedList(dh.inputList.getList().ElementAt(dh.inputList.Current));
+        dh.getInputList().discardCurrent();
+            dh.removeFromSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+            dh.removeFromDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+            dh.addToDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
             setCurrentImageStatusLabel();
     }//GEN-LAST:event_buttonSelectActionPerformed
 
     private void buttonRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRestartActionPerformed
-         buttonStartProcess_Click(sender, e);
+         this.buttonStartProcessActionPerformed(evt);
     }//GEN-LAST:event_buttonRestartActionPerformed
 
     private void buttonNextStepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextStepActionPerformed
-        listViewSelectedImages.Items.Clear();
-            listViewDiscardedImages.Items.Clear();
-            foreach (Image item in dh.selectedList.getList())
+        listViewSelectedImages.removeAll();
+        DefaultListModel listModelSelected = new DefaultListModel();
+        listViewSelectedImages.setModel(listModelSelected);
+        listViewDiscardedImages.removeAll();
+        DefaultListModel listModelDiscarded = new DefaultListModel();
+        listViewDiscardedImages.setModel(listModelDiscarded);
+        for (DImage item : dh.getSelectedList().getList())
+        {
+            String extensions = "";
+            for (DFile file : item.getFiles())
             {
-                String extensions = "";
-                foreach (descartes.File file in item.getFiles())
-                {
-                    extensions += "(" + file.Ext + ")";
-                }
-
-                listViewSelectedImages.Items.Add(
-                        item.getFileTitle() + " " + extensions
-                    );
+                extensions += "(" + file.getExt() + ")";
             }
-            labelNumSelectedImages.Content = "(" + dh.selectedList.count().ToString() + ")";
-            foreach (Image item in dh.discardedList.getList())
+
+            listModelSelected.addElement(
+                    item.getFileTitle() + " " + extensions
+                );
+        }
+        labelNumSelectedImages.setText("(" + dh.getSelectedList().count() + ")");
+        for (DImage item : dh.getDiscardedList().getList())
+        {
+            String extensions = "";
+            for (DFile file : item.getFiles())
             {
-                String extensions = "";
-                foreach (descartes.File file in item.getFiles())
-                {
-                    extensions += "(" + file.Ext + ")";
-                }
-
-                listViewDiscardedImages.Items.Add(
-                        item.getFileTitle() + " " + extensions
-                    );
+                extensions += "(" + file.getExt() + ")";
             }
-            labelNumDiscardedImages.Content = "(" + dh.discardedList.count().ToString() + ")";
-            tabItemOutput.Focus();
+
+            listModelDiscarded.addElement(
+                    item.getFileTitle() + " " + extensions
+                );
+        }
+        labelNumDiscardedImages.setText("(" + dh.getDiscardedList().count() + ")");
+        tabControlMain.setSelectedComponent(tabItemOutput);
     }//GEN-LAST:event_buttonNextStepActionPerformed
 
     private void buttonEndProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEndProcessActionPerformed
-        progressBarOutputProcess.Minimum = 0;
-            progressBarOutputProcess.Maximum = dh.discardedList.count() + dh.selectedList.count();
+        String ps = java.io.File.pathSeparator;
+        progressBarOutputProcess.setMinimum(0);
+        progressBarOutputProcess.setMaximum(dh.getDiscardedList().count() + dh.getSelectedList().count());
 
-            dh.GenerateListFileForSelectedFiles = (comboBoxSelectedImagesOutputFormat.SelectedIndex == 1 || comboBoxSelectedImagesOutputFormat.SelectedIndex == 2);
-            dh.GenerateListFileForDiscardedFiles = (comboBoxDiscardedImagesOutputFormat.SelectedIndex == 1 || comboBoxDiscardedImagesOutputFormat.SelectedIndex == 2);
-            dh.GenerateFileStructureForSelectedFiles = (comboBoxSelectedImagesOutputFormat.SelectedIndex == 0 || comboBoxSelectedImagesOutputFormat.SelectedIndex == 2);
-            dh.GenerateFileStructureForDiscardedFiles = (comboBoxDiscardedImagesOutputFormat.SelectedIndex == 0 || comboBoxDiscardedImagesOutputFormat.SelectedIndex == 2);
-            dh.DiscardedFilesListFileFullName = dh.OutputDiscardedPath + @"\..\descartes.discarded.lst";
-            dh.SelectedFilesListFileFullName = dh.OutputSelectedPath + @"\..\descartes.selected.lst";
-            dh.KeepCopyOfDiscardedFiles = (comboBoxDiscardedImagesMoveCopy.SelectedIndex == 2);
-            dh.KeepCopyOfSelectedFiles = (comboBoxSelectedImagesMoveCopy.SelectedIndex == 2);
-
-
-            
-            dh.Progress += new DirectoryHandler.ProgressHandler(onSeparateFilesProgress);
-            dh.Finish += new DirectoryHandler.ProgressHandler(onSeparateFilesFinish);
-            dh.separateFiles();
+        dh.setGenerateListFileForSelectedFiles((comboBoxSelectedImagesOutputFormat.getSelectedIndex() == 1 || comboBoxSelectedImagesOutputFormat.getSelectedIndex() == 2));
+        dh.setGenerateListFileForDiscardedFiles((comboBoxDiscardedImagesOutputFormat.getSelectedIndex() == 1 || comboBoxDiscardedImagesOutputFormat.getSelectedIndex() == 2));
+        dh.setGenerateFileStructureForSelectedFiles((comboBoxSelectedImagesOutputFormat.getSelectedIndex() == 0 || comboBoxSelectedImagesOutputFormat.getSelectedIndex() == 2));
+        dh.setGenerateFileStructureForDiscardedFiles((comboBoxDiscardedImagesOutputFormat.getSelectedIndex() == 0 || comboBoxDiscardedImagesOutputFormat.getSelectedIndex() == 2));
+        dh.setDiscardedFilesListFileFullName(dh.getOutputDiscardedPath() + ps +".."+ ps +"descartes.discarded.lst");
+        dh.setSelectedFilesListFileFullName(dh.getOutputSelectedPath() + ps +".."+ ps + "descartes.selected.lst");
+        dh.setKeepCopyOfDiscardedFiles((comboBoxDiscardedImagesMoveCopy.getSelectedIndex() == 2));
+        dh.setKeepCopyOfSelectedFiles((comboBoxSelectedImagesMoveCopy.getSelectedIndex() == 2));
+        
+        //dh.Progress += new DirectoryHandler.ProgressHandler(onSeparateFilesProgress);
+        //dh.Finish += new DirectoryHandler.ProgressHandler(onSeparateFilesFinish);
+        dh.separateFiles();
     }//GEN-LAST:event_buttonEndProcessActionPerformed
 
     private void textBoxOutputSelectedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxOutputSelectedFolderActionPerformed
-        if (!textBoxOutputSelectedFolder.Text.Equals(""))
+        if (!textBoxOutputSelectedFolder.getText().equals(""))
             {
-                textBoxOutputSelectedFolder.Background = Brushes.LightGreen;
-                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = true;
+                //textBoxOutputSelectedFolder.Background = Brushes.LightGreen;
+                if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(true);
             }
             else
             {
-                textBoxOutputSelectedFolder.Background = Brushes.LightCoral;
-                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = false;
+                //textBoxOutputSelectedFolder.Background = Brushes.LightCoral;
+                if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(false);
             }
     }//GEN-LAST:event_textBoxOutputSelectedFolderActionPerformed
 
     private void textBoxOutputDiscardedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxOutputDiscardedFolderActionPerformed
-        if (!textBoxOutputDiscardedFolder.Text.Equals(""))
+        if (!textBoxOutputDiscardedFolder.getText().equals(""))
             {
-                textBoxOutputDiscardedFolder.Background = Brushes.LightGreen;
-                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = true;
+                //textBoxOutputDiscardedFolder.Background = Brushes.LightGreen;
+                if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(true);
             }
             else
             {
-                textBoxOutputDiscardedFolder.Background = Brushes.LightCoral;
-                if (buttonStartProcess != null) this.buttonStartProcess.IsEnabled = false;
+                //textBoxOutputDiscardedFolder.Background = Brushes.LightCoral;
+                if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(false);
             }
     }//GEN-LAST:event_textBoxOutputDiscardedFolderActionPerformed
 
     private void buttonBrowseSelectedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseSelectedFolderActionPerformed
-        FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-            if (folderBrowser.ShowDialog().Equals(System.Windows.Forms.DialogResult.OK))
-            {
-                textBoxOutputSelectedFolder.Text = folderBrowser.SelectedPath;
-            }
+        JFileChooser folderBrowser = new JFileChooser();
+        folderBrowser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY);
+        int retval = folderBrowser.showOpenDialog(this);
+        if (retval == JFileChooser.APPROVE_OPTION)
+            textBoxOutputSelectedFolder.setText(folderBrowser.getSelectedFile().getPath());
     }//GEN-LAST:event_buttonBrowseSelectedFolderActionPerformed
 
     private void buttonBrowseDiscardedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseDiscardedFolderActionPerformed
-         FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-            if (folderBrowser.ShowDialog().Equals(System.Windows.Forms.DialogResult.OK))
-            {
-                textBoxOutputDiscardedFolder.Text = folderBrowser.SelectedPath;
-            }
+        JFileChooser folderBrowser = new JFileChooser();
+        folderBrowser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY);
+        int retval = folderBrowser.showOpenDialog(this);
+        if (retval == JFileChooser.APPROVE_OPTION)
+            textBoxOutputDiscardedFolder.setText(folderBrowser.getSelectedFile().getPath());            
     }//GEN-LAST:event_buttonBrowseDiscardedFolderActionPerformed
 
     private void buttonExitNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitNowActionPerformed
-        descartes.App.Current.Shutdown();
+        System.exit(0);
     }//GEN-LAST:event_buttonExitNowActionPerformed
 
     private void buttonStartAgainWithNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartAgainWithNewActionPerformed
@@ -1001,27 +983,27 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonStartAgainWithNewActionPerformed
 
     private void labelSummaryOpenInputFolderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSummaryOpenInputFolderMouseClicked
-        dh.openExplorerWindow(dh.Path);
+        dh.openExplorerWindow(dh.getPath());
     }//GEN-LAST:event_labelSummaryOpenInputFolderMouseClicked
 
     private void buttonStartAgainWithSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartAgainWithSelectedActionPerformed
-        string dir = dh.OutputSelectedPath;
-            cleanUpControls();
-            this.loadPreset(dir);
+        String dir = dh.getOutputSelectedPath();
+        cleanUpControls();
+        this.loadPreset(dir);
     }//GEN-LAST:event_buttonStartAgainWithSelectedActionPerformed
 
     private void labelSummaryOpenSelectedFolderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSummaryOpenSelectedFolderMouseClicked
-         dh.openExplorerWindow(dh.OutputSelectedPath);
+         dh.openExplorerWindow(dh.getOutputSelectedPath());
     }//GEN-LAST:event_labelSummaryOpenSelectedFolderMouseClicked
 
     private void labelSummaryOpenDiscardedFolderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSummaryOpenDiscardedFolderMouseClicked
-        dh.openExplorerWindow(dh.OutputDiscardedPath);
+        dh.openExplorerWindow(dh.getOutputDiscardedPath());
     }//GEN-LAST:event_labelSummaryOpenDiscardedFolderMouseClicked
 
     private void buttonStartAgainWithDiscardedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartAgainWithDiscardedActionPerformed
-        string dir = dh.OutputDiscardedPath;
-            cleanUpControls();
-            this.loadPreset(dir);
+        String dir = dh.getOutputDiscardedPath();
+        cleanUpControls();
+        this.loadPreset(dir);
     }//GEN-LAST:event_buttonStartAgainWithDiscardedActionPerformed
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
@@ -1036,140 +1018,145 @@ public class MainWindow extends javax.swing.JFrame {
     private Boolean cleanUpControls(){
             Boolean ret = true;
             ret = dh.cleanupProcessVars();
-            progressBarOutputProcess.Value = 0;
-            progressBarOutputProcess.Maximum = 0;
-            listViewDiscardedImages.Items.Clear();
-            listViewSelectedImages.Items.Clear();
-            imageCurrent.Source = null;
-            imagePrev.Source = null;
-            imageNext.Source = null;
-            buttonPrevImage.IsEnabled = false;
-            buttonNextImage.IsEnabled = false;
-            listViewFilesFound.Items.Clear();
-            labelNumFiles.Content = "0";
-            textBoxOutputDiscardedFolder.Text = @"c:\";
-            textBoxOutputSelectedFolder.Text = @"c:\";
-            textBoxInputFolder.Text = @"c:\";
-            buttonStartProcess.IsEnabled = false;
-            tabItemInput.IsEnabled = true;
-            tabItemProcess.IsEnabled = false;
-            tabItemOutput.IsEnabled = false;
-            tabItemEnd.IsEnabled = false;
-            tabItemInput.Focus();
+            progressBarOutputProcess.setValue(0);
+            progressBarOutputProcess.setMaximum(0);
+            listViewDiscardedImages.removeAll();
+            listViewSelectedImages.removeAll();
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+            buttonPrevImage.setEnabled(false);
+            buttonNextImage.setEnabled(false);
+            listViewFilesFound.removeAll();
+            labelNumFiles.setText("0");
+            String ps = java.io.File.pathSeparator;
+            String app_path = DirectoryHandler.getAppPath() + ps;
+            
+            textBoxOutputDiscardedFolder.setText(app_path);
+            textBoxOutputSelectedFolder.setText(app_path);
+            textBoxInputFolder.setText(app_path);
+            buttonStartProcess.setEnabled(false);
+            tabItemInput.setEnabled(true);
+            tabItemProcess.setEnabled(false);
+            tabItemOutput.setEnabled(false);
+            tabItemEnd.setEnabled(false);
+            tabControlMain.setSelectedComponent(tabItemInput);
             return ret;
         }
 
-    private void loadPreset(string initialDir) {
-        textBoxInputFolder.Text = initialDir;
-        textBoxOutputSelectedFolder.Text = textBoxInputFolder.Text + @"selected\";
-        textBoxOutputDiscardedFolder.Text = textBoxInputFolder.Text + @"discarded\";
-        this.buttonReloadFilesFound_Click(null, null);
-        tabItemInput.Focus();
+    private void loadPreset(String initialDir) {
+        String ps = java.io.File.pathSeparator;
+        textBoxInputFolder.setText(initialDir);
+        textBoxOutputSelectedFolder.setText(textBoxInputFolder.getText() + "selected" + ps);
+        textBoxOutputDiscardedFolder.setText(textBoxInputFolder.getText() + "discarded" + ps);
+        this.buttonReloadFilesFoundActionPerformed(null);
+        tabControlMain.setSelectedComponent(tabItemInput);
     }
         
     private String getCurrentImagePositionCaption() {
-            return "(" + (dh.inputList.Current + 1).ToString() + " of " + dh.inputList.count().ToString() + ")";
+            return "(" + (dh.getInputList().getCurrent() + 1) + " of " + dh.getInputList().count() + ")";
         }
 
     private void setCurrentImageStatusLabel()
     {
-        if (dh.inputList.getList().ElementAt(dh.inputList.Current).Status.Equals("selected"))
+        if (dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equals("selected"))
         {
 
-            labelCurrentImageStatus.Foreground = Brushes.Green;
-            labelCurrentImageStatus.Content = "SELECTED";
+            //labelCurrentImageStatus.Foreground = Brushes.Green;
+            labelCurrentImageStatus.setText("SELECTED");
         }
-        else if (dh.inputList.getList().ElementAt(dh.inputList.Current).Status.Equals("discarded"))
+        else if (dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equals("discarded"))
         {
-            labelCurrentImageStatus.Foreground = Brushes.Red;
-            labelCurrentImageStatus.Content = "DISCARDED";
+            //labelCurrentImageStatus.Foreground = Brushes.Red;
+            labelCurrentImageStatus.setText("DISCARDED");
         }
         else
         {
-            labelCurrentImageStatus.Foreground = Brushes.DarkGray;
-            labelCurrentImageStatus.Content = "UNRATED";
+            //labelCurrentImageStatus.Foreground = Brushes.DarkGray;
+            labelCurrentImageStatus.setText("UNRATED");
         }
     }
     
     private void checkInputListBounds()
     {
         //check prev button
-        if (dh.inputList.count() > 0 && (Int32)dh.inputList.Current != 0)
+        if (dh.getInputList().count() > 0 && dh.getInputList().getCurrent() != 0)
         {
-            buttonPrevImage.IsEnabled = true;
+            buttonPrevImage.setEnabled(true);
         }
         else
         {
-            buttonPrevImage.IsEnabled = false;
+            buttonPrevImage.setEnabled(false);
         }
 
         //check next button
-        if (dh.inputList.count() > 0
-                && (Int32)dh.inputList.Current < dh.inputList.count() - 1
-            )
+        if (dh.getInputList().count() > 0
+                && dh.getInputList().getCurrent() < dh.getInputList().count() - 1)
         {
-            buttonNextImage.IsEnabled = true;
+            buttonNextImage.setEnabled(true);
         }
         else
         {
-            buttonNextImage.IsEnabled = false;
+            buttonNextImage.setEnabled(false);
         }
 
     }
     
         //delegate void SetTextCallback(string text);
-        public void onSeparateFilesProgress(DirectoryHandler dh, ProgressEventArgs e)
-        {
-            progressBarOutputProcess.Value++;
-            progressBarOutputProcess.UpdateLayout();
-            System.Windows.Forms.Application.DoEvents();
-        }
+//        public void onSeparateFilesProgress(DirectoryHandler dh, ProgressEventArgs e)
+//        {
+//            progressBarOutputProcess.setValue(progressBarOutputProcess.getValue()+1);
+//            progressBarOutputProcess.doLayout();
+//            //doEvents();
+//        }
 
-        public void onSeparateFilesFinish(DirectoryHandler dh, ProgressEventArgs e)
-        {
-            progressBarOutputProcess.Value++;
-            progressBarOutputProcess.UpdateLayout();
-
-            System.Windows.Forms.MessageBox.Show("Process finished!", "Descartes", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            System.Collections.Hashtable stats = dh.getProcessStats();
-            labelSummaryTotalFiles.Content = stats["input"];
-            labelSummarySelectedFiles.Content = stats["selected"];
-            labelSummaryDiscardedFiles.Content = stats["discarded"];
-            labelSummaryIgnoredFiles.Content = stats["ignored"];
-            tabItemInput.IsEnabled = false;
-            tabItemProcess.IsEnabled = false;
-            tabItemOutput.IsEnabled = false;
-            tabItemEnd.IsEnabled = true;
-            tabItemEnd.Focus();
-        }
+//        public void onSeparateFilesFinish(DirectoryHandler dh, ProgressEventArgs e)
+//        {
+//            progressBarOutputProcess.setValue(progressBarOutputProcess.getValue()+1);
+//            progressBarOutputProcess.doLayout();
+//            JOptionPane.showMessageDialog(this,
+//                                        "Process finished!",
+//                                        "Descartes",
+//                                        JOptionPane.INFORMATION_MESSAGE);
+//            HashMap<String, Integer> stats = dh.getProcessStats();
+//            labelSummaryTotalFiles.setText(stats["input"]);
+//            labelSummarySelectedFiles.setText(stats["selected"]);
+//            labelSummaryDiscardedFiles.setText(stats["discarded"]);
+//            labelSummaryIgnoredFiles.setText(stats["ignored"]);
+//            tabItemInput.setEnabled(false);
+//            tabItemProcess.setEnabled(false);
+//            tabItemOutput.setEnabled(false);
+//            tabItemEnd.setEnabled(true);
+//            tabControlMain.setSelectedComponent(tabItemEnd);
+//        }
         
         
         private void dyn_resize()
         {
-            if (this.WindowState == System.Windows.WindowState.Maximized)
-            {
-                tabControlMain.Width = Screen.PrimaryScreen.WorkingArea.Width - 20;
-                tabControlMain.Height = Screen.PrimaryScreen.WorkingArea.Height - 30;
-            }
-            else {
-                tabControlMain.Width = this.RestoreBounds.Width - 20;
-                tabControlMain.Height = this.RestoreBounds.Height - 30;
-            }
-            
-            
-            List<Grid> grids = new List<Grid>();
-            grids.Add(gridTabInput);
-            grids.Add(gridTabProcess);
-            grids.Add(gridTabOutput);
-            grids.Add(gridTabEnd);
+//          if (MainWindow.getWindows()[0].isMaximumSizeSet())
+//            {
+//                tabControlMain.Width = Screen.PrimaryScreen.WorkingArea.Width - 20;
+//                tabControlMain.Height = Screen.PrimaryScreen.WorkingArea.Height - 30;
+//            }
+//            else {
+//                tabControlMain.Width = this.RestoreBounds.Width - 20;
+//                tabControlMain.Height = this.RestoreBounds.Height - 30;
+//            }
+//            
+//            
+//            List<Grid> grids = new List<Grid>();
+//            grids.Add(gridTabInput);
+//            grids.Add(gridTabProcess);
+//            grids.Add(gridTabOutput);
+//            grids.Add(gridTabEnd);
+//
+//            grids.ForEach(x =>
+//            {
+//                x.Width = tabControlMain.ActualWidth - 5;
+//                x.Height = tabControlMain.ActualHeight - tabItemInput.ActualHeight - 5;
+//            });
 
-            grids.ForEach(x =>
-            {
-                x.Width = tabControlMain.ActualWidth - 5;
-                x.Height = tabControlMain.ActualHeight - tabItemInput.ActualHeight - 5;
-            });
-
-            this.UpdateLayout();
+            this.doLayout();
         }
     
     
@@ -1230,9 +1217,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox comboBoxDiscardedImagesOutputFormat;
     private javax.swing.JComboBox comboBoxSelectedImagesMoveCopy;
     private javax.swing.JComboBox comboBoxSelectedImagesOutputFormat;
-    private descartesj.ImageViewer imageCurrent;
-    private descartesj.ImageViewer imageNext;
-    private descartesj.ImageViewer imagePrev;
+    private javax.swing.JLabel imageCurrent;
+    private javax.swing.JLabel imageNext;
+    private javax.swing.JLabel imagePrev;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1251,12 +1238,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1273,9 +1254,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel labelSummaryOpenSelectedFolder;
     private javax.swing.JLabel labelSummarySelectedFiles;
     private javax.swing.JLabel labelSummaryTotalFiles;
+    private javax.swing.JList listViewDiscardedImages;
     private javax.swing.JList listViewFilesFound;
+    private javax.swing.JList listViewSelectedImages;
     private javax.swing.JProgressBar progressBarOutputProcess;
     private javax.swing.JTabbedPane tabControlMain;
+    private javax.swing.JPanel tabItemEnd;
+    private javax.swing.JPanel tabItemInput;
+    private javax.swing.JPanel tabItemOutput;
+    private javax.swing.JPanel tabItemProcess;
     private javax.swing.JTextField textBoxInputFolder;
     private javax.swing.JTextField textBoxOutputDiscardedFolder;
     private javax.swing.JTextField textBoxOutputSelectedFolder;
