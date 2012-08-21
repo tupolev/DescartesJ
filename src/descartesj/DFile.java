@@ -6,6 +6,7 @@ package descartesj;
 
 
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 /**
  *
  * @author tupolev
@@ -55,10 +56,11 @@ private String path = "";
         {
             if (keepCopy) {
                 Files.copy( (new java.io.File(this.getFullName())).toPath(),
-                        (new java.io.File(destFileFullPath)).toPath(), null);                    
+                        (new java.io.File(destFileFullPath)).toPath(), StandardCopyOption.ATOMIC_MOVE);                    
             }else{
-                Files.move( (new java.io.File(this.getFullName())).toPath(),
-                        (new java.io.File(destFileFullPath)).toPath(), null);
+                (new java.io.File(this.getFullName())).renameTo((new java.io.File(destFileFullPath)));
+//                Files.move( (new java.io.File(this.getFullName())).toPath(),
+//                        (new java.io.File(destFileFullPath)).toPath(), null);
             }
         }
         catch (Exception ex) {

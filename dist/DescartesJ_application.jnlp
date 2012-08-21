@@ -11,13 +11,13 @@
     </security>
     <resources>
         <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="DescartesJ.jar" size="24537" download="eager" />
+        <jar href="DescartesJ.jar" size="296791" download="eager" />
     </resources>
     <resources>
         <jfx:javafx-runtime version="2.0+" 
             href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
     </resources>
-    <application-desc main-class="descartesj.DescartesJ">
+    <application-desc main-class="descartesj.MainWindow">
     </application-desc>
     <update check="always"/>
 </jnlp>

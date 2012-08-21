@@ -3,6 +3,7 @@ package descartesj;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.*;
+import javax.swing.JProgressBar;
 
 public class DirectoryHandler {
 
@@ -189,6 +190,7 @@ public class DirectoryHandler {
 
     public String getImagePathForItem(int item, String type){
         String path = "";
+        if (type.charAt(0) == '.') type = type.substring(1);
         if (item >= 0 && item < this.getInputList().count())
         {
             List<DFile> fl = this.getInputList().getList().get(item).getFiles();
@@ -196,9 +198,9 @@ public class DirectoryHandler {
 
             for (int i = 0; (i < fl.size() && !found); i++)
             {
-                if (fl.get(i).getExt() == type)
+                if (fl.get(i).getExt().toLowerCase().equals(type.toLowerCase()))
                 {
-                    path = fl.get(i).getPath() + java.io.File.pathSeparator + fl.get(i).getName();
+                    path = fl.get(i).getPath() + java.io.File.separator + fl.get(i).getName();
                     found = true;
                 }
             }
@@ -238,8 +240,8 @@ public class DirectoryHandler {
         }
     }
 
-    public HashMap<String, Integer> getProcessStats() { 
-        HashMap<String, Integer> values = new HashMap();
+    public ArrayList<Integer> getProcessStats() { 
+        ArrayList<Integer> values = new ArrayList<Integer>();
         int input = 0;
         for (DImage img : this.getInputList().getList())
             for (DFile file : img.getFiles())
@@ -255,10 +257,10 @@ public class DirectoryHandler {
             for (DFile file : img.getFiles())
                 discarded++;
 
-        values.put("input", input);
-        values.put("selected", selected);
-        values.put("discarded", discarded);
-        values.put("ignored", (input - (selected + discarded)));
+        values.add(0, input);
+        values.add(1, selected);
+        values.add(2, discarded);
+        values.add(3, (input - (selected + discarded)));
 
         return values; 
     }
@@ -287,7 +289,7 @@ public class DirectoryHandler {
         return ret;
     }
 
-    public void separateFiles(){
+    public void separateFiles(JProgressBar progressBar){
             Boolean ret = true;
             Integer totalFiles = 0;
             try
@@ -309,10 +311,12 @@ public class DirectoryHandler {
                         //write discarded files structure
                         if (this.getGenerateFileStructureForDiscardedFiles())
                         {
-                            file.move(this.getOutputDiscardedPath() + java.io.File.pathSeparator + file.getName(), this.getKeepCopyOfDiscardedFiles());
+                            file.move(this.getOutputDiscardedPath() + java.io.File.separator + file.getName(), this.getKeepCopyOfDiscardedFiles());
                         }
                         totalFiles++;
-
+                        progressBar.setValue(totalFiles);
+                        progressBar.doLayout();
+                        progressBar.updateUI();
 //                        if (Progress != null)
 //                        {
 //                            ProgressEventArgs progress = new ProgressEventArgs();
@@ -344,10 +348,12 @@ public class DirectoryHandler {
                         {
                             //write selected files structure
                             file.move(
-                                    this.getOutputSelectedPath() + java.io.File.pathSeparator + file.getName(), this.getKeepCopyOfSelectedFiles());
+                                    this.getOutputSelectedPath() + java.io.File.separator + file.getName(), this.getKeepCopyOfSelectedFiles());
                         }
                         totalFiles++;
-
+                            progressBar.setValue(totalFiles);
+                        progressBar.doLayout();
+                        progressBar.updateUI();
 //                        if (Progress != null)
 //                        {
 //                            ProgressEventArgs progress = new ProgressEventArgs();
@@ -363,6 +369,9 @@ public class DirectoryHandler {
                 fileWriterStream.close();
                 fileWriterStream = null;
                 
+                progressBar.setValue(totalFiles);
+                progressBar.doLayout();
+                progressBar.updateUI();
 //                if (Finish != null)
 //                {
 //                    ProgressEventArgs progress = new ProgressEventArgs();
