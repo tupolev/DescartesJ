@@ -934,13 +934,13 @@ public class MainWindow extends javax.swing.JFrame {
         dh.setGenerateFileStructureForDiscardedFiles((comboBoxDiscardedImagesOutputFormat.getSelectedIndex() == 0 || comboBoxDiscardedImagesOutputFormat.getSelectedIndex() == 2));
         dh.setDiscardedFilesListFileFullName(dh.getOutputDiscardedPath() + ps +".."+ ps +"descartes.discarded.lst");
         dh.setSelectedFilesListFileFullName(dh.getOutputSelectedPath() + ps +".."+ ps + "descartes.selected.lst");
-        dh.setKeepCopyOfDiscardedFiles((comboBoxDiscardedImagesMoveCopy.getSelectedIndex() == 2));
-        dh.setKeepCopyOfSelectedFiles((comboBoxSelectedImagesMoveCopy.getSelectedIndex() == 2));
+        dh.setKeepCopyOfDiscardedFiles((comboBoxDiscardedImagesMoveCopy.getSelectedIndex() == 1));
+        dh.setKeepCopyOfSelectedFiles((comboBoxSelectedImagesMoveCopy.getSelectedIndex() == 1));
         
         //dh.Progress += new DirectoryHandler.ProgressHandler(onSeparateFilesProgress);
         //dh.Finish += new DirectoryHandler.ProgressHandler(onSeparateFilesFinish);
-        dh.separateFiles(this.progressBarOutputProcess);
-
+        dh.separateFiles(this, this.progressBarOutputProcess);
+        
         progressBarOutputProcess.setValue(progressBarOutputProcess.getValue()+1);
         progressBarOutputProcess.doLayout();
         JOptionPane.showMessageDialog(this,

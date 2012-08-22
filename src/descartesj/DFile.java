@@ -56,7 +56,7 @@ private String path = "";
         {
             if (keepCopy) {
                 Files.copy( (new java.io.File(this.getFullName())).toPath(),
-                        (new java.io.File(destFileFullPath)).toPath(), StandardCopyOption.ATOMIC_MOVE);                    
+                        (new java.io.File(destFileFullPath)).toPath(), StandardCopyOption.REPLACE_EXISTING);                    
             }else{
                 (new java.io.File(this.getFullName())).renameTo((new java.io.File(destFileFullPath)));
 //                Files.move( (new java.io.File(this.getFullName())).toPath(),
@@ -71,7 +71,7 @@ private String path = "";
     }
 
     public String getFullName() {
-        return this.getPath() + "/" + this.getName();
+        return this.getPath() + java.io.File.separator + this.getName();
     }
     
     public static String getFileNameWithoutExtension(String fullpath) {

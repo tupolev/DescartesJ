@@ -3,6 +3,7 @@ package descartesj;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.*;
+import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 
 public class DirectoryHandler {
@@ -228,12 +229,14 @@ public class DirectoryHandler {
     public void checkAndCreateOutputDirs() {
         try
         {
-            java.nio.file.Path path = (new java.io.File(this.getOutputDiscardedPath())).toPath();
-            if (!Files.isDirectory(path))
-                Files.createDirectory(path, null);
-            path = (new java.io.File(this.getOutputSelectedPath())).toPath();
-            if (!Files.isDirectory(path))
-                Files.createDirectory(path);
+            //java.nio.file.Path path = (new java.io.File(this.getOutputDiscardedPath())).toPath();
+            java.io.File path = new java.io.File(this.getOutputDiscardedPath());           
+            if (!path.isDirectory())
+                path.mkdirs();
+                //Files.createDirectory(path, null);
+            path = new java.io.File(this.getOutputSelectedPath());           
+            if (!path.isDirectory())
+                path.mkdirs();
         }
         catch (Exception ex) {
             System.out.print(ex.getMessage());
@@ -289,7 +292,7 @@ public class DirectoryHandler {
         return ret;
     }
 
-    public void separateFiles(JProgressBar progressBar){
+    public void separateFiles(JFrame window, JProgressBar progressBar){
             Boolean ret = true;
             Integer totalFiles = 0;
             try
@@ -306,7 +309,7 @@ public class DirectoryHandler {
                     {
                         //write discarded files list file
                         if (this.getGenerateListFileForDiscardedFiles())
-                            fileWriter.write(file.getName());
+                            fileWriter.write(file.getName()+"\n");
 
                         //write discarded files structure
                         if (this.getGenerateFileStructureForDiscardedFiles())
@@ -317,6 +320,8 @@ public class DirectoryHandler {
                         progressBar.setValue(totalFiles);
                         progressBar.doLayout();
                         progressBar.updateUI();
+                        window.repaint();
+                        window.doLayout();
 //                        if (Progress != null)
 //                        {
 //                            ProgressEventArgs progress = new ProgressEventArgs();
@@ -326,12 +331,13 @@ public class DirectoryHandler {
 //                        }
                     }
                 }
-                fileWriter.flush();
-                fileWriter.close();
-                fileWriter = null;       
                 fileWriterStream.flush();
+                fileWriter.flush();
                 fileWriterStream.close();
+                fileWriter.close();
                 fileWriterStream = null;
+                fileWriter = null;      
+                
 
                 //next collect process with selected files
                 fileWriterStream = new java.io.FileWriter(this.getSelectedFilesListFileFullName());
@@ -342,7 +348,7 @@ public class DirectoryHandler {
                     {
                         //selectedFilesPlainList.Add(file.ToString());
                         if (this.getGenerateListFileForSelectedFiles())
-                            fileWriter.write(file.getName());
+                            fileWriter.write(file.getName() + "\n");
 
                         if (this.getGenerateFileStructureForSelectedFiles())
                         {
@@ -354,6 +360,9 @@ public class DirectoryHandler {
                             progressBar.setValue(totalFiles);
                         progressBar.doLayout();
                         progressBar.updateUI();
+                        window.repaint();
+                        window.doLayout();
+                        
 //                        if (Progress != null)
 //                        {
 //                            ProgressEventArgs progress = new ProgressEventArgs();
@@ -362,12 +371,13 @@ public class DirectoryHandler {
 //                        }
                     }
                 }
-                fileWriter.flush();
-                fileWriter.close();
-                fileWriter = null;       
                 fileWriterStream.flush();
+                fileWriter.flush();
                 fileWriterStream.close();
+                fileWriter.close();
                 fileWriterStream = null;
+                fileWriter = null;       
+
                 
                 progressBar.setValue(totalFiles);
                 progressBar.doLayout();
