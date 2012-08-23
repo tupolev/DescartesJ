@@ -9,6 +9,8 @@ import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.nio.file.LinkOption;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +32,6 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         app_path = DirectoryHandler.getAppPath();
         unavailableImage = new ImageIcon(app_path + java.io.File.separator + "images" + java.io.File.separator + "no.gif" );
-                //app_path + java.io.File.separator + "images" + java.io.File.separator + "no.gif"
                 
     }
 
@@ -716,27 +717,23 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void buttonReloadFilesFoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadFilesFoundActionPerformed
         listViewFilesFound.removeAll();
-            //progressBarLoading.Visibility = System.Windows.Visibility.Visible;
-            labelNumFiles.setText("Loading");
-            dh = new DirectoryHandler(textBoxInputFolder.getText());
-            labelNumFiles.setText(dh.fillInputList().toString());
-            DefaultListModel model = new DefaultListModel();
-            listViewFilesFound.setModel(model);
-            for (DImage item : dh.getInputList().getList())
-            {
+        labelNumFiles.setText("Loading");
+        dh = new DirectoryHandler(textBoxInputFolder.getText());
+        labelNumFiles.setText(dh.fillInputList().toString());
+        DefaultListModel model = new DefaultListModel();
+        listViewFilesFound.setModel(model);
+        for (DImage item : dh.getInputList().getList())
+        {
 
-                String extensions = "";
-                for (DFile file : item.getFiles())
-                {
-                    extensions += "(" + file.getExt() + ")";
-                }
-                
-               model.add(0, item.getFileTitle() + " " + extensions);
-               
-                    
-            }
+        String extensions = "";
+        for (DFile file : item.getFiles()) {
+            extensions += "(" + file.getExt() + ")";
+        }
 
-            //progressBarLoading.Visibility = System.Windows.Visibility.Hidden;
+        model.add(0, item.getFileTitle() + " " + extensions);
+
+
+        }
     }//GEN-LAST:event_buttonReloadFilesFoundActionPerformed
 
     private void textBoxInputFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxInputFolderActionPerformed
@@ -764,7 +761,6 @@ public class MainWindow extends javax.swing.JFrame {
         else
             descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
 
-        //labelCurrentImageFilename.setContent(pathCurr);
         setCurrentImageStatusLabel();
 
         String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
@@ -773,7 +769,6 @@ public class MainWindow extends javax.swing.JFrame {
         else
             descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
 
-        //labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
         labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
         tabItemProcess.setEnabled(true);
         tabItemOutput.setEnabled(true);
@@ -784,8 +779,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonStartProcessActionPerformed
 
     private void buttonPrevImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrevImageActionPerformed
-        //System.Windows.Input.Cursor oldCursor = this.Cursor;
-        //this.Cursor = System.Windows.Input.Cursors.AppStarting;
+        Cursor oldCursor = this.getCursor();
+        this.setCursor(Cursor.WAIT_CURSOR);
         if ((dh.getInputList().getCurrent() < dh.getInputList().count()) && (dh.getInputList().getCurrent() > 0))
         {
             dh.getInputList().setCurrent(dh.getInputList().getCurrent()-1);
@@ -796,8 +791,7 @@ public class MainWindow extends javax.swing.JFrame {
                 descartesj.Utils.setIconImage(pathPrev, imagePrev);
             else    
                 descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
-            //labelPrevImageFilename.Content = System.IO.Path.GetFileName(pathPrev);
-
+        
             String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
             if ((new java.io.File(pathCurr)).exists())
                 descartesj.Utils.setIconImage(pathCurr, imageCurrent);
@@ -805,7 +799,6 @@ public class MainWindow extends javax.swing.JFrame {
                 descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
 
 
-            //labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
             setCurrentImageStatusLabel();
 
             String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
@@ -814,7 +807,8 @@ public class MainWindow extends javax.swing.JFrame {
             else
                 descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
 
-            //labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
+            buttonSelect.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("selected"));
+            buttonDiscard.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("discarded"));
         }
         else
         {
@@ -822,12 +816,12 @@ public class MainWindow extends javax.swing.JFrame {
         }
         labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
         checkInputListBounds();
-        //this.Cursor = oldCursor;
+        this.setCursor(oldCursor);
     }//GEN-LAST:event_buttonPrevImageActionPerformed
 
     private void buttonNextImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextImageActionPerformed
-        //System.Windows.Input.Cursor oldCursor = this.Cursor;
-        //this.Cursor = System.Windows.Input.Cursors.AppStarting;
+        Cursor oldCursor = this.getCursor();
+        this.setCursor(Cursor.WAIT_CURSOR);
 
         if (dh.getInputList().getCurrent() < dh.getInputList().count()
             && dh.getInputList().getCurrent() >= 0)
@@ -836,19 +830,16 @@ public class MainWindow extends javax.swing.JFrame {
 
             String pathPrev = dh.getImagePathForItem(dh.getInputList().getCurrent() - 1, ".JPG");
            
-            //if (java.nio.file.Files.exists((new java.io.File(pathPrev)).toPath(), null))
-           if ((new java.io.File(pathPrev)).exists()) 
+            if ((new java.io.File(pathPrev)).exists()) 
                 descartesj.Utils.setIconImage(pathPrev, imagePrev);
             else    
                 descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
-                //labelPrevImageFilename.Content = System.IO.Path.GetFileName(pathPrev);
-
+          
             String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
             if ((new java.io.File(pathCurr)).exists())
                 descartesj.Utils.setIconImage(pathCurr, imageCurrent);
             else
                 descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
-            //labelCurrentImageFilename.Content = System.IO.Path.GetFileName(pathCurr);
             setCurrentImageStatusLabel();
 
             String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
@@ -856,7 +847,9 @@ public class MainWindow extends javax.swing.JFrame {
                 descartesj.Utils.setIconImage(pathNext, imageNext);
             else
                 descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
-            //labelNextImageFilename.Content = System.IO.Path.GetFileName(pathNext);
+            buttonSelect.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("selected"));
+            buttonDiscard.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("discarded"));
+            
         }
         else
         {
@@ -864,7 +857,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
         checkInputListBounds();
-        //this.Cursor = oldCursor;
+        this.setCursor(oldCursor);
     }//GEN-LAST:event_buttonNextImageActionPerformed
 
     private void buttonDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDiscardActionPerformed
@@ -923,6 +916,9 @@ public class MainWindow extends javax.swing.JFrame {
         tabControlMain.setSelectedComponent(tabItemOutput);
     }//GEN-LAST:event_buttonNextStepActionPerformed
 
+    private static void messagebox(JFrame window, String message, String title, Integer options) {       
+        JOptionPane.showMessageDialog(window, message, title, options);    
+    }
     private void buttonEndProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEndProcessActionPerformed
         String ps = java.io.File.separator;
         progressBarOutputProcess.setMinimum(0);
@@ -937,37 +933,54 @@ public class MainWindow extends javax.swing.JFrame {
         dh.setKeepCopyOfDiscardedFiles((comboBoxDiscardedImagesMoveCopy.getSelectedIndex() == 1));
         dh.setKeepCopyOfSelectedFiles((comboBoxSelectedImagesMoveCopy.getSelectedIndex() == 1));
         
-        //dh.Progress += new DirectoryHandler.ProgressHandler(onSeparateFilesProgress);
-        //dh.Finish += new DirectoryHandler.ProgressHandler(onSeparateFilesFinish);
-        dh.separateFiles(this, this.progressBarOutputProcess);
+       
         
-        progressBarOutputProcess.setValue(progressBarOutputProcess.getValue()+1);
-        progressBarOutputProcess.doLayout();
-        JOptionPane.showMessageDialog(this,
-                                    "Process finished!",
-                                    "Descartes",
-                                    JOptionPane.INFORMATION_MESSAGE);
-        ArrayList<Integer> stats = dh.getProcessStats();
-        labelSummaryTotalFiles.setText(stats.get(0).toString());
-        labelSummarySelectedFiles.setText(stats.get(1).toString());
-        labelSummaryDiscardedFiles.setText(stats.get(2).toString());
-        labelSummaryIgnoredFiles.setText(stats.get(3).toString());
-        tabItemInput.setEnabled(false);
-        tabItemProcess.setEnabled(false);
-        tabItemOutput.setEnabled(false);
-        tabItemEnd.setEnabled(true);
-        tabControlMain.setSelectedComponent(tabItemEnd);
+        SeparateFilesTask task = new SeparateFilesTask(dh);
+        task.addPropertyChangeListener(
+        new PropertyChangeListener() {
+            public  void propertyChange(PropertyChangeEvent evt) {
+                if ("progress".equals(evt.getPropertyName())) {
+                     progressBarOutputProcess.setValue((Integer)evt.getNewValue());
+                     progressBarOutputProcess.doLayout();
+                     progressBarOutputProcess.repaint();
+                     System.out.println("progress desde mainwindow");
+                }
+                
+                if ("state".equals(evt.getPropertyName())
+                 && SwingWorker.StateValue.DONE == evt.getNewValue()) {
+                    System.out.println("finito desde window");
+                    progressBarOutputProcess.setValue(progressBarOutputProcess.getValue()+1);
+                    progressBarOutputProcess.doLayout();
+                    MainWindow.messagebox((JFrame)descartesj.MainWindow.getFrames()[0], "Process finished!",
+                                                "Descartes",
+                                                JOptionPane.INFORMATION_MESSAGE);
+                    ArrayList<Integer> stats = dh.getProcessStats();
+                    labelSummaryTotalFiles.setText(stats.get(0).toString());
+                    labelSummarySelectedFiles.setText(stats.get(1).toString());
+                    labelSummaryDiscardedFiles.setText(stats.get(2).toString());
+                    labelSummaryIgnoredFiles.setText(stats.get(3).toString());
+                    tabItemInput.setEnabled(false);
+                    tabItemProcess.setEnabled(false);
+                    tabItemOutput.setEnabled(false);
+                    tabItemEnd.setEnabled(true);
+                    tabControlMain.setSelectedComponent(tabItemEnd);
+                }
+            }
+        });
+
+        task.execute();
+        
     }//GEN-LAST:event_buttonEndProcessActionPerformed
 
     private void textBoxOutputSelectedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxOutputSelectedFolderActionPerformed
         if (!textBoxOutputSelectedFolder.getText().equals(""))
             {
-                //textBoxOutputSelectedFolder.Background = Brushes.LightGreen;
+                textBoxOutputSelectedFolder.setBackground(Color.GREEN);
                 if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(true);
             }
             else
             {
-                //textBoxOutputSelectedFolder.Background = Brushes.LightCoral;
+                textBoxOutputSelectedFolder.setBackground(Color.RED);
                 if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(false);
             }
     }//GEN-LAST:event_textBoxOutputSelectedFolderActionPerformed
@@ -975,12 +988,12 @@ public class MainWindow extends javax.swing.JFrame {
     private void textBoxOutputDiscardedFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxOutputDiscardedFolderActionPerformed
         if (!textBoxOutputDiscardedFolder.getText().equals(""))
             {
-                //textBoxOutputDiscardedFolder.Background = Brushes.LightGreen;
+                textBoxOutputDiscardedFolder.setBackground(Color.GREEN);
                 if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(true);
             }
             else
             {
-                //textBoxOutputDiscardedFolder.Background = Brushes.LightCoral;
+                textBoxOutputDiscardedFolder.setBackground(Color.RED);
                 if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(false);
             }
     }//GEN-LAST:event_textBoxOutputDiscardedFolderActionPerformed
@@ -1078,6 +1091,7 @@ public class MainWindow extends javax.swing.JFrame {
         textBoxOutputDiscardedFolder.setText(textBoxInputFolder.getText() + "discarded" + ps);
         this.buttonReloadFilesFoundActionPerformed(null);
         tabControlMain.setSelectedComponent(tabItemInput);
+        this.buttonStartProcess.setEnabled(true);
     }
         
     private String getCurrentImagePositionCaption() {
@@ -1089,17 +1103,17 @@ public class MainWindow extends javax.swing.JFrame {
         if (dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equals("selected"))
         {
 
-            //labelCurrentImageStatus.Foreground = Brushes.Green;
+            labelCurrentImageStatus.setForeground(Color.GREEN);
             labelCurrentImageStatus.setText("SELECTED");
         }
         else if (dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equals("discarded"))
         {
-            //labelCurrentImageStatus.Foreground = Brushes.Red;
+            labelCurrentImageStatus.setForeground(Color.RED);
             labelCurrentImageStatus.setText("DISCARDED");
         }
         else
         {
-            //labelCurrentImageStatus.Foreground = Brushes.DarkGray;
+            labelCurrentImageStatus.setForeground(Color.DARK_GRAY);
             labelCurrentImageStatus.setText("UNRATED");
         }
     }
@@ -1128,61 +1142,10 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
     }
-    
-        //delegate void SetTextCallback(string text);
-//        public void onSeparateFilesProgress(DirectoryHandler dh, ProgressEventArgs e)
-//        {
-//            progressBarOutputProcess.setValue(progressBarOutputProcess.getValue()+1);
-//            progressBarOutputProcess.doLayout();
-//            //doEvents();
-//        }
-
-//        public void onSeparateFilesFinish(DirectoryHandler dh, ProgressEventArgs e)
-//        {
-//            progressBarOutputProcess.setValue(progressBarOutputProcess.getValue()+1);
-//            progressBarOutputProcess.doLayout();
-//            JOptionPane.showMessageDialog(this,
-//                                        "Process finished!",
-//                                        "Descartes",
-//                                        JOptionPane.INFORMATION_MESSAGE);
-//            HashMap<String, Integer> stats = dh.getProcessStats();
-//            labelSummaryTotalFiles.setText(stats["input"]);
-//            labelSummarySelectedFiles.setText(stats["selected"]);
-//            labelSummaryDiscardedFiles.setText(stats["discarded"]);
-//            labelSummaryIgnoredFiles.setText(stats["ignored"]);
-//            tabItemInput.setEnabled(false);
-//            tabItemProcess.setEnabled(false);
-//            tabItemOutput.setEnabled(false);
-//            tabItemEnd.setEnabled(true);
-//            tabControlMain.setSelectedComponent(tabItemEnd);
-//        }
         
         
         private void dyn_resize()
         {
-//          if (MainWindow.getWindows()[0].isMaximumSizeSet())
-//            {
-//                tabControlMain.Width = Screen.PrimaryScreen.WorkingArea.Width - 20;
-//                tabControlMain.Height = Screen.PrimaryScreen.WorkingArea.Height - 30;
-//            }
-//            else {
-//                tabControlMain.Width = this.RestoreBounds.Width - 20;
-//                tabControlMain.Height = this.RestoreBounds.Height - 30;
-//            }
-//            
-//            
-//            List<Grid> grids = new List<Grid>();
-//            grids.Add(gridTabInput);
-//            grids.Add(gridTabProcess);
-//            grids.Add(gridTabOutput);
-//            grids.Add(gridTabEnd);
-//
-//            grids.ForEach(x =>
-//            {
-//                x.Width = tabControlMain.ActualWidth - 5;
-//                x.Height = tabControlMain.ActualHeight - tabItemInput.ActualHeight - 5;
-//            });
-
             this.doLayout();
         }
     
