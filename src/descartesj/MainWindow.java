@@ -185,6 +185,7 @@ public class MainWindow extends javax.swing.JFrame {
                     });
 
                     buttonStartProcess.setText("Start process");
+                    buttonStartProcess.setEnabled(false);
                     buttonStartProcess.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                             buttonStartProcessActionPerformed(evt);
@@ -725,35 +726,48 @@ public class MainWindow extends javax.swing.JFrame {
         for (DImage item : dh.getInputList().getList())
         {
 
-        String extensions = "";
-        for (DFile file : item.getFiles()) {
-            extensions += "(" + file.getExt() + ")";
+            String extensions = "";
+            for (DFile file : item.getFiles()) {
+                extensions += "(" + file.getExt() + ")";
+            }
+
+            model.add(0, item.getFileTitle() + " " + extensions);
+
+
         }
-
-        model.add(0, item.getFileTitle() + " " + extensions);
-
-
-        }
+        
+        buttonStartProcess.setEnabled(dh.getInputList().getList().size() > 0);
+        
+        
     }//GEN-LAST:event_buttonReloadFilesFoundActionPerformed
 
     private void textBoxInputFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBoxInputFolderActionPerformed
         File file = new File(textBoxInputFolder.getText());
         if (file.exists()){
-            //textBoxInputFolder.Background = Brushes.LightGreen;
+            textBoxInputFolder.setBackground(Color.GREEN);
             if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(true);
         }
         else
         {
-            //textBoxInputFolder.Background = Brushes.LightCoral;
+            textBoxInputFolder.setBackground(Color.red);
             if (buttonStartProcess != null) this.buttonStartProcess.setEnabled(false);
         }
     }//GEN-LAST:event_textBoxInputFolderActionPerformed
 
     private void buttonStartProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartProcessActionPerformed
+        if (textBoxInputFolder.getText().equals("")) return;
         dh.getInputList().setCurrent(0);
         descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
-        dh.setOutputSelectedPath(textBoxOutputSelectedFolder.getText());
-        dh.setOutputDiscardedPath(textBoxOutputDiscardedFolder.getText());
+        
+        String outdir = (textBoxOutputSelectedFolder.getText().equals("") 
+                ? textBoxInputFolder.getText() + java.io.File.separator + "selected" + java.io.File.separator
+                : textBoxOutputSelectedFolder.getText());
+        dh.setOutputSelectedPath(outdir);
+        
+        outdir = (textBoxOutputDiscardedFolder.getText().equals("") 
+                ? textBoxInputFolder.getText() + java.io.File.separator + "selected" + java.io.File.separator
+                : textBoxOutputDiscardedFolder.getText());
+        dh.setOutputDiscardedPath(outdir);
 
         String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
         if ((new java.io.File(pathCurr)).exists())

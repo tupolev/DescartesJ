@@ -3,7 +3,8 @@
     <information>
         <title>DescartesJ</title>
         <vendor>tupolev</vendor>
-        <description>Swing application embedding JavaFX components.</description> 
+        <description>Swing application embedding JavaFX components.</description>
+        <icon href="Annotate_Default.ico" kind="default"/> 
         <offline-allowed/>
     </information>
     <security>
@@ -11,7 +12,7 @@
     </security>
     <resources>
         <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="DescartesJ.jar" size="301251" download="eager" />
+        <jar href="DescartesJ.jar" size="301298" download="eager" />
     </resources>
     <resources>
         <jfx:javafx-runtime version="2.0+" 
