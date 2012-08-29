@@ -12,7 +12,7 @@
     </security>
     <resources>
         <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="DescartesJ.jar" size="299016" download="eager" />
+        <jar href="DescartesJ.jar" size="300788" download="eager" />
     </resources>
     <resources>
         <jfx:javafx-runtime version="2.0+" 

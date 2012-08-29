@@ -30,6 +30,10 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        tabControlMain.setEnabledAt(0, true);
+        tabControlMain.setEnabledAt(1, false);
+        tabControlMain.setEnabledAt(2, false);
+        tabControlMain.setEnabledAt(3, false);
         app_path = DirectoryHandler.getAppPath();
         unavailableImage = new ImageIcon(app_path + java.io.File.separator + "images" + java.io.File.separator + "no.gif" );
                 
@@ -126,568 +130,619 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        textBoxInputFolder.setText("c:\\");
-            textBoxInputFolder.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    textBoxInputFolderActionPerformed(evt);
-                }
-            });
+        tabControlMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-            buttonBrowse.setText("...");
-            buttonBrowse.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    buttonBrowseActionPerformed(evt);
-                }
-            });
+        textBoxInputFolder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("descartesj/Bundle"); // NOI18N
+        textBoxInputFolder.setText(bundle.getString("MainWindow.textBoxInputFolder.text")); // NOI18N
+        textBoxInputFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textBoxInputFolderActionPerformed(evt);
+            }
+        });
 
-            textBoxOutputSelectedFolder.setText("c:\\");
-                textBoxOutputSelectedFolder.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        textBoxOutputSelectedFolderActionPerformed(evt);
-                    }
-                });
+        buttonBrowse.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonBrowse.setText(bundle.getString("MainWindow.buttonBrowse.text")); // NOI18N
+        buttonBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBrowseActionPerformed(evt);
+            }
+        });
 
-                textBoxOutputDiscardedFolder.setText("c:\\");
-                    textBoxOutputDiscardedFolder.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            textBoxOutputDiscardedFolderActionPerformed(evt);
-                        }
-                    });
+        textBoxOutputSelectedFolder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        textBoxOutputSelectedFolder.setText(bundle.getString("MainWindow.textBoxOutputSelectedFolder.text")); // NOI18N
+        textBoxOutputSelectedFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textBoxOutputSelectedFolderActionPerformed(evt);
+            }
+        });
 
-                    buttonBrowseSelectedFolder.setText("...");
-                    buttonBrowseSelectedFolder.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonBrowseSelectedFolderActionPerformed(evt);
-                        }
-                    });
+        textBoxOutputDiscardedFolder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        textBoxOutputDiscardedFolder.setText(bundle.getString("MainWindow.textBoxOutputDiscardedFolder.text")); // NOI18N
+        textBoxOutputDiscardedFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textBoxOutputDiscardedFolderActionPerformed(evt);
+            }
+        });
 
-                    buttonBrowseDiscardedFolder.setText("...");
-                    buttonBrowseDiscardedFolder.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonBrowseDiscardedFolderActionPerformed(evt);
-                        }
-                    });
+        buttonBrowseSelectedFolder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonBrowseSelectedFolder.setText(bundle.getString("MainWindow.buttonBrowseSelectedFolder.text")); // NOI18N
+        buttonBrowseSelectedFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBrowseSelectedFolderActionPerformed(evt);
+            }
+        });
 
-                    jScrollPane1.setViewportView(listViewFilesFound);
+        buttonBrowseDiscardedFolder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonBrowseDiscardedFolder.setText(bundle.getString("MainWindow.buttonBrowseDiscardedFolder.text")); // NOI18N
+        buttonBrowseDiscardedFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBrowseDiscardedFolderActionPerformed(evt);
+            }
+        });
 
-                    labelNumFiles.setText("0");
+        listViewFilesFound.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jScrollPane1.setViewportView(listViewFilesFound);
 
-                    jLabel2.setText("unique file titles found");
+        labelNumFiles.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelNumFiles.setText(bundle.getString("MainWindow.labelNumFiles.text")); // NOI18N
 
-                    buttonReloadFilesFound.setText("Reload");
-                    buttonReloadFilesFound.setName("buttonReloadFilesFound"); // NOI18N
-                    buttonReloadFilesFound.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonReloadFilesFoundActionPerformed(evt);
-                        }
-                    });
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText(bundle.getString("MainWindow.jLabel2.text")); // NOI18N
 
-                    buttonStartProcess.setText("Start process");
-                    buttonStartProcess.setEnabled(false);
-                    buttonStartProcess.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonStartProcessActionPerformed(evt);
-                        }
-                    });
+        buttonReloadFilesFound.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonReloadFilesFound.setText(bundle.getString("MainWindow.buttonReloadFilesFound.text")); // NOI18N
+        buttonReloadFilesFound.setName("buttonReloadFilesFound"); // NOI18N
+        buttonReloadFilesFound.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReloadFilesFoundActionPerformed(evt);
+            }
+        });
 
-                    jLabel1.setText("Select folder to review...");
+        buttonStartProcess.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonStartProcess.setText(bundle.getString("MainWindow.buttonStartProcess.text")); // NOI18N
+        buttonStartProcess.setEnabled(false);
+        buttonStartProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStartProcessActionPerformed(evt);
+            }
+        });
 
-                    jLabel28.setText("Files found");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText(bundle.getString("MainWindow.jLabel1.text")); // NOI18N
 
-                    javax.swing.GroupLayout tabItemInputLayout = new javax.swing.GroupLayout(tabItemInput);
-                    tabItemInput.setLayout(tabItemInputLayout);
-                    tabItemInputLayout.setHorizontalGroup(
-                        tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tabItemInputLayout.createSequentialGroup()
-                            .addGap(21, 21, 21)
-                            .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(tabItemInputLayout.createSequentialGroup()
-                                    .addComponent(jLabel28)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(tabItemInputLayout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(tabItemInputLayout.createSequentialGroup()
-                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(tabItemInputLayout.createSequentialGroup()
-                                            .addComponent(textBoxInputFolder)
-                                            .addGap(45, 45, 45)
-                                            .addComponent(buttonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(tabItemInputLayout.createSequentialGroup()
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                                            .addGap(18, 18, 18)
-                                            .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(tabItemInputLayout.createSequentialGroup()
-                                                    .addComponent(labelNumFiles)
-                                                    .addGap(43, 43, 43)
-                                                    .addComponent(jLabel2)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(buttonReloadFilesFound))
-                                                .addGroup(tabItemInputLayout.createSequentialGroup()
-                                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(textBoxOutputDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(textBoxOutputSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemInputLayout.createSequentialGroup()
-                                                            .addGap(80, 80, 80)
-                                                            .addComponent(buttonStartProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                    .addGap(18, 18, 18)
-                                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(buttonBrowseSelectedFolder, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                                                        .addComponent(buttonBrowseDiscardedFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                                    .addGap(30, 30, 30))))
-                    );
-                    tabItemInputLayout.setVerticalGroup(
-                        tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tabItemInputLayout.createSequentialGroup()
-                            .addContainerGap(44, Short.MAX_VALUE)
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(textBoxInputFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(buttonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(31, 31, 31)
-                            .addComponent(jLabel28)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(tabItemInputLayout.createSequentialGroup()
-                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel28.setText(bundle.getString("MainWindow.jLabel28.text")); // NOI18N
+
+        javax.swing.GroupLayout tabItemInputLayout = new javax.swing.GroupLayout(tabItemInput);
+        tabItemInput.setLayout(tabItemInputLayout);
+        tabItemInputLayout.setHorizontalGroup(
+            tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabItemInputLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabItemInputLayout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(tabItemInputLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(tabItemInputLayout.createSequentialGroup()
+                        .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tabItemInputLayout.createSequentialGroup()
+                                .addComponent(textBoxInputFolder)
+                                .addGap(45, 45, 45)
+                                .addComponent(buttonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(tabItemInputLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(tabItemInputLayout.createSequentialGroup()
                                         .addComponent(labelNumFiles)
+                                        .addGap(43, 43, 43)
                                         .addComponent(jLabel2)
-                                        .addComponent(buttonReloadFilesFound, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(textBoxOutputSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(buttonBrowseSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(tabItemInputLayout.createSequentialGroup()
-                                            .addGap(18, 18, 18)
-                                            .addComponent(textBoxOutputDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemInputLayout.createSequentialGroup()
-                                            .addGap(18, 18, 18)
-                                            .addComponent(buttonBrowseDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(71, 71, 71)
-                                    .addComponent(buttonStartProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(59, 59, 59))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(44, Short.MAX_VALUE))
-                    );
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(buttonReloadFilesFound))
+                                    .addGroup(tabItemInputLayout.createSequentialGroup()
+                                        .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(textBoxOutputDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textBoxOutputSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemInputLayout.createSequentialGroup()
+                                                .addGap(80, 80, 80)
+                                                .addComponent(buttonStartProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(buttonBrowseSelectedFolder, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                                            .addComponent(buttonBrowseDiscardedFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addGap(30, 30, 30))))
+        );
+        tabItemInputLayout.setVerticalGroup(
+            tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabItemInputLayout.createSequentialGroup()
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textBoxInputFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(tabItemInputLayout.createSequentialGroup()
+                        .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelNumFiles)
+                            .addComponent(jLabel2)
+                            .addComponent(buttonReloadFilesFound, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textBoxOutputSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonBrowseSelectedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tabItemInputLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(textBoxOutputDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemInputLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonBrowseDiscardedFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(71, 71, 71)
+                        .addComponent(buttonStartProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
 
-                    tabControlMain.addTab("1-The input", tabItemInput);
+        tabControlMain.addTab(bundle.getString("MainWindow.tabItemInput.TabConstraints.tabTitle"), tabItemInput); // NOI18N
 
-                    tabItemProcess.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tabItemProcess.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-                    buttonRestart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    buttonRestart.setText("<< Restart");
-                    buttonRestart.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonRestartActionPerformed(evt);
-                        }
-                    });
+        buttonRestart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonRestart.setText(bundle.getString("MainWindow.buttonRestart.text")); // NOI18N
+        buttonRestart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRestartActionPerformed(evt);
+            }
+        });
 
-                    buttonNextStep.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    buttonNextStep.setText("Next step >>");
-                    buttonNextStep.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonNextStepActionPerformed(evt);
-                        }
-                    });
+        buttonNextStep.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonNextStep.setText(bundle.getString("MainWindow.buttonNextStep.text")); // NOI18N
+        buttonNextStep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNextStepActionPerformed(evt);
+            }
+        });
 
-                    buttonDiscard.setBackground(new java.awt.Color(153, 255, 0));
-                    buttonDiscard.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    buttonDiscard.setText("Select");
-                    buttonDiscard.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonDiscardActionPerformed(evt);
-                        }
-                    });
+        buttonDiscard.setBackground(new java.awt.Color(153, 255, 0));
+        buttonDiscard.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonDiscard.setText(bundle.getString("MainWindow.buttonDiscard.text")); // NOI18N
+        buttonDiscard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDiscardActionPerformed(evt);
+            }
+        });
 
-                    buttonSelect.setBackground(new java.awt.Color(255, 0, 51));
-                    buttonSelect.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    buttonSelect.setText("Discard");
-                    buttonSelect.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonSelectActionPerformed(evt);
-                        }
-                    });
+        buttonSelect.setBackground(new java.awt.Color(255, 0, 51));
+        buttonSelect.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonSelect.setText(bundle.getString("MainWindow.buttonSelect.text")); // NOI18N
+        buttonSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSelectActionPerformed(evt);
+            }
+        });
 
-                    labelCurrentImageStatus.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    labelCurrentImageStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                    labelCurrentImageStatus.setText("UNRATED");
+        labelCurrentImageStatus.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelCurrentImageStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCurrentImageStatus.setText(bundle.getString("MainWindow.labelCurrentImageStatus.text")); // NOI18N
 
-                    jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-                    jLabel6.setText("Current image");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText(bundle.getString("MainWindow.jLabel6.text")); // NOI18N
 
-                    labelCurrentImagePositionInList.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    labelCurrentImagePositionInList.setText("(0 of 0)");
+        labelCurrentImagePositionInList.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelCurrentImagePositionInList.setText(bundle.getString("MainWindow.labelCurrentImagePositionInList.text")); // NOI18N
 
-                    buttonPrevImage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    buttonPrevImage.setText("< Prev. Image");
-                    buttonPrevImage.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonPrevImageActionPerformed(evt);
-                        }
-                    });
+        buttonPrevImage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonPrevImage.setText(bundle.getString("MainWindow.buttonPrevImage.text")); // NOI18N
+        buttonPrevImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPrevImageActionPerformed(evt);
+            }
+        });
 
-                    buttonNextImage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                    buttonNextImage.setText("Next image >");
-                    buttonNextImage.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonNextImageActionPerformed(evt);
-                        }
-                    });
+        buttonNextImage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonNextImage.setText(bundle.getString("MainWindow.buttonNextImage.text")); // NOI18N
+        buttonNextImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNextImageActionPerformed(evt);
+            }
+        });
 
-                    imagePrev.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        imagePrev.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-                    imageNext.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        imageNext.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-                    imageCurrent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        imageCurrent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-                    javax.swing.GroupLayout tabItemProcessLayout = new javax.swing.GroupLayout(tabItemProcess);
-                    tabItemProcess.setLayout(tabItemProcessLayout);
-                    tabItemProcessLayout.setHorizontalGroup(
-                        tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tabItemProcessLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                    .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(labelCurrentImagePositionInList, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap())
-                                .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                    .addComponent(buttonRestart)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buttonPrevImage)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buttonDiscard)
-                                    .addGap(3, 3, 3)
-                                    .addComponent(labelCurrentImageStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(buttonSelect)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buttonNextImage)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buttonNextStep)
-                                    .addGap(25, 25, 25))))
-                    );
-                    tabItemProcessLayout.setVerticalGroup(
-                        tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(labelCurrentImagePositionInList))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
-                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(buttonRestart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(buttonPrevImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(buttonDiscard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(buttonSelect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(buttonNextImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(buttonNextStep, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelCurrentImageStatus, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addContainerGap())
-                    );
+        javax.swing.GroupLayout tabItemProcessLayout = new javax.swing.GroupLayout(tabItemProcess);
+        tabItemProcess.setLayout(tabItemProcessLayout);
+        tabItemProcessLayout.setHorizontalGroup(
+            tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabItemProcessLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabItemProcessLayout.createSequentialGroup()
+                        .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tabItemProcessLayout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(labelCurrentImagePositionInList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(tabItemProcessLayout.createSequentialGroup()
+                        .addComponent(buttonRestart)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonPrevImage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonDiscard)
+                        .addGap(3, 3, 3)
+                        .addComponent(labelCurrentImageStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonSelect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonNextImage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonNextStep)
+                        .addGap(25, 25, 25))))
+        );
+        tabItemProcessLayout.setVerticalGroup(
+            tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(labelCurrentImagePositionInList))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonRestart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonPrevImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDiscard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSelect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonNextImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonNextStep, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCurrentImageStatus, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
 
-                    tabItemProcessLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonDiscard, buttonNextImage, buttonNextStep, buttonPrevImage, buttonRestart, buttonSelect, labelCurrentImageStatus});
+        tabItemProcessLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonDiscard, buttonNextImage, buttonNextStep, buttonPrevImage, buttonRestart, buttonSelect, labelCurrentImageStatus});
 
-                    tabControlMain.addTab("2-The process", tabItemProcess);
+        tabControlMain.addTab(bundle.getString("MainWindow.tabItemProcess.TabConstraints.tabTitle"), tabItemProcess); // NOI18N
 
-                    listViewSelectedImages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 0)));
-                    jScrollPane2.setViewportView(listViewSelectedImages);
+        listViewSelectedImages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 0)));
+        listViewSelectedImages.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jScrollPane2.setViewportView(listViewSelectedImages);
 
-                    listViewDiscardedImages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-                    jScrollPane3.setViewportView(listViewDiscardedImages);
+        listViewDiscardedImages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        listViewDiscardedImages.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jScrollPane3.setViewportView(listViewDiscardedImages);
 
-                    jLabel8.setText("What to do with these images?");
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText(bundle.getString("MainWindow.jLabel8.text")); // NOI18N
 
-                    jLabel9.setText("Output type");
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText(bundle.getString("MainWindow.jLabel9.text")); // NOI18N
 
-                    jLabel10.setText("What to do with these images?");
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setText(bundle.getString("MainWindow.jLabel10.text")); // NOI18N
 
-                    jLabel11.setText("Output type");
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setText(bundle.getString("MainWindow.jLabel11.text")); // NOI18N
 
-                    comboBoxSelectedImagesMoveCopy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Move", "Copy", "Do nothing" }));
+        comboBoxSelectedImagesMoveCopy.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        comboBoxSelectedImagesMoveCopy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Move", "Copy", "Do nothing" }));
 
-                    comboBoxSelectedImagesOutputFormat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Files", "List", "Files and list" }));
+        comboBoxSelectedImagesOutputFormat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        comboBoxSelectedImagesOutputFormat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Files", "List", "Files and list" }));
 
-                    comboBoxDiscardedImagesMoveCopy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Move", "Copy", "Do nothing" }));
+        comboBoxDiscardedImagesMoveCopy.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        comboBoxDiscardedImagesMoveCopy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Move", "Copy", "Do nothing" }));
 
-                    comboBoxDiscardedImagesOutputFormat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Files", "List", "Files and list" }));
+        comboBoxDiscardedImagesOutputFormat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        comboBoxDiscardedImagesOutputFormat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Files", "List", "Files and list" }));
 
-                    buttonEndProcess.setText("End process");
-                    buttonEndProcess.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonEndProcessActionPerformed(evt);
-                        }
-                    });
+        buttonEndProcess.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonEndProcess.setText(bundle.getString("MainWindow.buttonEndProcess.text")); // NOI18N
+        buttonEndProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEndProcessActionPerformed(evt);
+            }
+        });
 
-                    jLabel12.setText("Selected images");
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText(bundle.getString("MainWindow.jLabel12.text")); // NOI18N
 
-                    jLabel13.setText("Discarded image");
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText(bundle.getString("MainWindow.jLabel13.text")); // NOI18N
 
-                    labelNumSelectedImages.setText("(Collecting data)");
+        labelNumSelectedImages.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelNumSelectedImages.setText(bundle.getString("MainWindow.labelNumSelectedImages.text")); // NOI18N
 
-                    labelNumDiscardedImages.setText("(Collecting data)");
+        labelNumDiscardedImages.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelNumDiscardedImages.setText(bundle.getString("MainWindow.labelNumDiscardedImages.text")); // NOI18N
 
-                    javax.swing.GroupLayout tabItemOutputLayout = new javax.swing.GroupLayout(tabItemOutput);
-                    tabItemOutput.setLayout(tabItemOutputLayout);
-                    tabItemOutputLayout.setHorizontalGroup(
-                        tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tabItemOutputLayout.createSequentialGroup()
-                            .addGap(70, 70, 70)
-                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(tabItemOutputLayout.createSequentialGroup()
-                                    .addGap(0, 78, Short.MAX_VALUE)
-                                    .addComponent(buttonEndProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(progressBarOutputProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(tabItemOutputLayout.createSequentialGroup()
-                                    .addGap(60, 60, 60)
-                                    .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(tabItemOutputLayout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(comboBoxSelectedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel12)
-                                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(labelNumSelectedImages, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(tabItemOutputLayout.createSequentialGroup()
-                                                    .addComponent(jLabel9)
-                                                    .addGap(146, 146, 146)
-                                                    .addComponent(comboBoxSelectedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel13)
-                                        .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(comboBoxDiscardedImagesMoveCopy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboBoxDiscardedImagesOutputFormat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel10)
-                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel11)
-                                                .addComponent(labelNumDiscardedImages))))))
-                            .addGap(134, 134, 134))
-                    );
-                    tabItemOutputLayout.setVerticalGroup(
-                        tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tabItemOutputLayout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel13))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelNumSelectedImages)
-                                .addComponent(labelNumDiscardedImages))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2))
-                            .addGap(31, 31, 31)
-                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        javax.swing.GroupLayout tabItemOutputLayout = new javax.swing.GroupLayout(tabItemOutput);
+        tabItemOutput.setLayout(tabItemOutputLayout);
+        tabItemOutputLayout.setHorizontalGroup(
+            tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabItemOutputLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabItemOutputLayout.createSequentialGroup()
+                        .addComponent(buttonEndProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(progressBarOutputProcess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(tabItemOutputLayout.createSequentialGroup()
+                        .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(tabItemOutputLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
-                                .addComponent(jLabel10)
-                                .addComponent(comboBoxSelectedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(comboBoxDiscardedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(21, 21, 21)
-                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel11)
-                                .addComponent(comboBoxSelectedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(comboBoxDiscardedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(buttonEndProcess, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                                .addComponent(progressBarOutputProcess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(39, 39, 39))
-                    );
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(comboBoxSelectedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(labelNumSelectedImages, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(tabItemOutputLayout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(146, 146, 146)
+                                    .addComponent(comboBoxSelectedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(tabItemOutputLayout.createSequentialGroup()
+                                    .addComponent(labelNumDiscardedImages)
+                                    .addGap(223, 223, 223))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(tabItemOutputLayout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(141, 141, 141)
+                                        .addComponent(comboBoxDiscardedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(tabItemOutputLayout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(comboBoxDiscardedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(115, 115, 115))
+        );
+        tabItemOutputLayout.setVerticalGroup(
+            tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabItemOutputLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNumSelectedImages)
+                    .addComponent(labelNumDiscardedImages))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(31, 31, 31)
+                .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10)
+                    .addComponent(comboBoxSelectedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxDiscardedImagesMoveCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11)
+                    .addComponent(comboBoxSelectedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxDiscardedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonEndProcess, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(progressBarOutputProcess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
+        );
 
-                    tabControlMain.addTab("3-The output", tabItemOutput);
+        tabControlMain.addTab(bundle.getString("MainWindow.tabItemOutput.TabConstraints.tabTitle"), tabItemOutput); // NOI18N
 
-                    buttonStartAgainWithSelected.setText("Start again, using selected files as input");
-                    buttonStartAgainWithSelected.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                    buttonStartAgainWithSelected.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonStartAgainWithSelectedActionPerformed(evt);
-                        }
-                    });
+        buttonStartAgainWithSelected.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonStartAgainWithSelected.setText(bundle.getString("MainWindow.buttonStartAgainWithSelected.text")); // NOI18N
+        buttonStartAgainWithSelected.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        buttonStartAgainWithSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStartAgainWithSelectedActionPerformed(evt);
+            }
+        });
 
-                    buttonStartAgainWithDiscarded.setText("Start again, using discarded files as input");
-                    buttonStartAgainWithDiscarded.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                    buttonStartAgainWithDiscarded.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonStartAgainWithDiscardedActionPerformed(evt);
-                        }
-                    });
+        buttonStartAgainWithDiscarded.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonStartAgainWithDiscarded.setText(bundle.getString("MainWindow.buttonStartAgainWithDiscarded.text")); // NOI18N
+        buttonStartAgainWithDiscarded.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        buttonStartAgainWithDiscarded.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStartAgainWithDiscardedActionPerformed(evt);
+            }
+        });
 
-                    buttonStartAgainWithNew.setText("Start again, using a new input folder");
-                    buttonStartAgainWithNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                    buttonStartAgainWithNew.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonStartAgainWithNewActionPerformed(evt);
-                        }
-                    });
+        buttonStartAgainWithNew.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonStartAgainWithNew.setText(bundle.getString("MainWindow.buttonStartAgainWithNew.text")); // NOI18N
+        buttonStartAgainWithNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        buttonStartAgainWithNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonStartAgainWithNewActionPerformed(evt);
+            }
+        });
 
-                    buttonExitNow.setText("Exit now");
-                    buttonExitNow.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                    buttonExitNow.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                            buttonExitNowActionPerformed(evt);
-                        }
-                    });
+        buttonExitNow.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonExitNow.setText(bundle.getString("MainWindow.buttonExitNow.text")); // NOI18N
+        buttonExitNow.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        buttonExitNow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExitNowActionPerformed(evt);
+            }
+        });
 
-                    jLabel16.setText("What do you want to do next?");
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setText(bundle.getString("MainWindow.jLabel16.text")); // NOI18N
 
-                    labelSummaryTotalFiles.setText("0");
+        labelSummaryTotalFiles.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelSummaryTotalFiles.setText(bundle.getString("MainWindow.labelSummaryTotalFiles.text")); // NOI18N
 
-                    labelSummarySelectedFiles.setText("0");
+        labelSummarySelectedFiles.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelSummarySelectedFiles.setText(bundle.getString("MainWindow.labelSummarySelectedFiles.text")); // NOI18N
 
-                    labelSummaryDiscardedFiles.setText("0");
+        labelSummaryDiscardedFiles.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelSummaryDiscardedFiles.setText(bundle.getString("MainWindow.labelSummaryDiscardedFiles.text")); // NOI18N
 
-                    labelSummaryIgnoredFiles.setText("0");
+        labelSummaryIgnoredFiles.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelSummaryIgnoredFiles.setText(bundle.getString("MainWindow.labelSummaryIgnoredFiles.text")); // NOI18N
 
-                    jLabel22.setText("total files");
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel22.setText(bundle.getString("MainWindow.jLabel22.text")); // NOI18N
 
-                    jLabel23.setText("selected files");
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel23.setText(bundle.getString("MainWindow.jLabel23.text")); // NOI18N
 
-                    jLabel24.setText("discarded files");
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel24.setText(bundle.getString("MainWindow.jLabel24.text")); // NOI18N
 
-                    jLabel25.setText("ignored files");
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel25.setText(bundle.getString("MainWindow.jLabel25.text")); // NOI18N
 
-                    jLabel27.setText("Summary");
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel27.setText(bundle.getString("MainWindow.jLabel27.text")); // NOI18N
 
-                    labelSummaryOpenInputFolder.setText("Open input folder");
-                    labelSummaryOpenInputFolder.addMouseListener(new java.awt.event.MouseAdapter() {
-                        public void mouseClicked(java.awt.event.MouseEvent evt) {
-                            labelSummaryOpenInputFolderMouseClicked(evt);
-                        }
-                    });
+        labelSummaryOpenInputFolder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelSummaryOpenInputFolder.setText(bundle.getString("MainWindow.labelSummaryOpenInputFolder.text")); // NOI18N
+        labelSummaryOpenInputFolder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelSummaryOpenInputFolderMouseClicked(evt);
+            }
+        });
 
-                    labelSummaryOpenSelectedFolder.setText("Open selected images folder");
-                    labelSummaryOpenSelectedFolder.addMouseListener(new java.awt.event.MouseAdapter() {
-                        public void mouseClicked(java.awt.event.MouseEvent evt) {
-                            labelSummaryOpenSelectedFolderMouseClicked(evt);
-                        }
-                    });
+        labelSummaryOpenSelectedFolder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelSummaryOpenSelectedFolder.setText(bundle.getString("MainWindow.labelSummaryOpenSelectedFolder.text")); // NOI18N
+        labelSummaryOpenSelectedFolder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelSummaryOpenSelectedFolderMouseClicked(evt);
+            }
+        });
 
-                    labelSummaryOpenDiscardedFolder.setText("Open discarded images folder");
-                    labelSummaryOpenDiscardedFolder.addMouseListener(new java.awt.event.MouseAdapter() {
-                        public void mouseClicked(java.awt.event.MouseEvent evt) {
-                            labelSummaryOpenDiscardedFolderMouseClicked(evt);
-                        }
-                    });
+        labelSummaryOpenDiscardedFolder.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelSummaryOpenDiscardedFolder.setText(bundle.getString("MainWindow.labelSummaryOpenDiscardedFolder.text")); // NOI18N
+        labelSummaryOpenDiscardedFolder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelSummaryOpenDiscardedFolderMouseClicked(evt);
+            }
+        });
 
-                    javax.swing.GroupLayout tabItemEndLayout = new javax.swing.GroupLayout(tabItemEnd);
-                    tabItemEnd.setLayout(tabItemEndLayout);
-                    tabItemEndLayout.setHorizontalGroup(
-                        tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tabItemEndLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(buttonStartAgainWithSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(buttonStartAgainWithDiscarded, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                                    .addComponent(buttonStartAgainWithNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(buttonExitNow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jSeparator1))
-                                .addGroup(tabItemEndLayout.createSequentialGroup()
-                                    .addComponent(labelSummaryTotalFiles)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel22))
-                                .addGroup(tabItemEndLayout.createSequentialGroup()
-                                    .addComponent(labelSummarySelectedFiles)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel23))
-                                .addGroup(tabItemEndLayout.createSequentialGroup()
-                                    .addComponent(labelSummaryDiscardedFiles)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel24))
-                                .addGroup(tabItemEndLayout.createSequentialGroup()
-                                    .addComponent(labelSummaryIgnoredFiles)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel25))
-                                .addComponent(jLabel27)
-                                .addComponent(labelSummaryOpenInputFolder)
-                                .addComponent(labelSummaryOpenSelectedFolder)
-                                .addComponent(labelSummaryOpenDiscardedFolder))
-                            .addContainerGap(617, Short.MAX_VALUE))
-                    );
-                    tabItemEndLayout.setVerticalGroup(
-                        tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemEndLayout.createSequentialGroup()
-                            .addGap(28, 28, 28)
-                            .addComponent(jLabel27)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelSummaryTotalFiles)
-                                .addComponent(jLabel22))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelSummarySelectedFiles)
-                                .addComponent(jLabel23))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelSummaryDiscardedFiles)
-                                .addComponent(jLabel24))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelSummaryIgnoredFiles)
-                                .addComponent(jLabel25))
-                            .addGap(43, 43, 43)
-                            .addComponent(labelSummaryOpenInputFolder)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(labelSummaryOpenSelectedFolder)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(labelSummaryOpenDiscardedFolder)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                            .addComponent(jLabel16)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonStartAgainWithSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(buttonStartAgainWithDiscarded, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(buttonStartAgainWithNew, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(buttonExitNow, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(63, 63, 63))
-                    );
+        javax.swing.GroupLayout tabItemEndLayout = new javax.swing.GroupLayout(tabItemEnd);
+        tabItemEnd.setLayout(tabItemEndLayout);
+        tabItemEndLayout.setHorizontalGroup(
+            tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabItemEndLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(buttonStartAgainWithSelected, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonStartAgainWithDiscarded, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonStartAgainWithNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonExitNow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16)
+                        .addComponent(jSeparator1))
+                    .addGroup(tabItemEndLayout.createSequentialGroup()
+                        .addComponent(labelSummaryTotalFiles)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel22))
+                    .addGroup(tabItemEndLayout.createSequentialGroup()
+                        .addComponent(labelSummarySelectedFiles)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel23))
+                    .addGroup(tabItemEndLayout.createSequentialGroup()
+                        .addComponent(labelSummaryDiscardedFiles)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel24))
+                    .addGroup(tabItemEndLayout.createSequentialGroup()
+                        .addComponent(labelSummaryIgnoredFiles)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel25))
+                    .addComponent(jLabel27)
+                    .addComponent(labelSummaryOpenInputFolder)
+                    .addComponent(labelSummaryOpenSelectedFolder)
+                    .addComponent(labelSummaryOpenDiscardedFolder))
+                .addContainerGap(604, Short.MAX_VALUE))
+        );
+        tabItemEndLayout.setVerticalGroup(
+            tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemEndLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSummaryTotalFiles)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSummarySelectedFiles)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSummaryDiscardedFiles)
+                    .addComponent(jLabel24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(tabItemEndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelSummaryIgnoredFiles)
+                    .addComponent(jLabel25))
+                .addGap(43, 43, 43)
+                .addComponent(labelSummaryOpenInputFolder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelSummaryOpenSelectedFolder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelSummaryOpenDiscardedFolder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonStartAgainWithSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonStartAgainWithDiscarded, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonStartAgainWithNew, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonExitNow, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
+        );
 
-                    tabControlMain.addTab("4-The end", tabItemEnd);
+        tabControlMain.addTab(bundle.getString("MainWindow.tabItemEnd.TabConstraints.tabTitle"), tabItemEnd); // NOI18N
 
-                    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-                    getContentPane().setLayout(layout);
-                    layout.setHorizontalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tabControlMain, javax.swing.GroupLayout.Alignment.TRAILING)
-                    );
-                    layout.setVerticalGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tabControlMain, javax.swing.GroupLayout.Alignment.TRAILING)
-                    );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabControlMain, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabControlMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+        );
 
-                    tabControlMain.getAccessibleContext().setAccessibleName("");
+        tabControlMain.getAccessibleContext().setAccessibleName(bundle.getString("MainWindow.tabControlMain.AccessibleContext.accessibleName")); // NOI18N
 
-                    pack();
-                }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     private void buttonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrowseActionPerformed
         JFileChooser folderBrowser = new JFileChooser();
@@ -776,6 +831,11 @@ public class MainWindow extends javax.swing.JFrame {
         labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
         tabItemProcess.setEnabled(true);
         tabItemOutput.setEnabled(true);
+        
+        tabControlMain.setEnabledAt(0, true);
+        tabControlMain.setEnabledAt(1, true);
+        tabControlMain.setEnabledAt(2, true);
+        tabControlMain.setEnabledAt(3, false);
         checkInputListBounds();
         tabControlMain.setSelectedComponent(tabItemProcess);
         tabControlMain.setSelectedIndex(1);
@@ -829,6 +889,11 @@ public class MainWindow extends javax.swing.JFrame {
                     tabItemProcess.setEnabled(false);
                     tabItemOutput.setEnabled(false);
                     tabItemEnd.setEnabled(true);
+                    
+        tabControlMain.setEnabledAt(0, false);
+        tabControlMain.setEnabledAt(1, false);
+        tabControlMain.setEnabledAt(2, true);
+        tabControlMain.setEnabledAt(3, true);
                     tabControlMain.setSelectedComponent(tabItemEnd);
                 }
             }
@@ -1049,7 +1114,13 @@ public class MainWindow extends javax.swing.JFrame {
             );
         }
         labelNumDiscardedImages.setText("(" + dh.getDiscardedList().count() + ")");
+        
+        tabControlMain.setEnabledAt(0, false);
+        tabControlMain.setEnabledAt(1, false);
+        tabControlMain.setEnabledAt(2, false);
+        tabControlMain.setEnabledAt(3, true);
         tabControlMain.setSelectedComponent(tabItemOutput);
+        
     }//GEN-LAST:event_buttonNextStepActionPerformed
 
     private void buttonRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRestartActionPerformed
@@ -1093,6 +1164,11 @@ public class MainWindow extends javax.swing.JFrame {
         textBoxOutputDiscardedFolder.setText(textBoxInputFolder.getText() + "discarded" + ps);
         this.buttonReloadFilesFoundActionPerformed(null);
         tabControlMain.setSelectedComponent(tabItemInput);
+        
+        tabControlMain.setEnabledAt(0, true);
+        tabControlMain.setEnabledAt(1, false);
+        tabControlMain.setEnabledAt(2, false);
+        tabControlMain.setEnabledAt(3, false);
         this.buttonStartProcess.setEnabled(true);
     }
         
@@ -1185,6 +1261,7 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindow().setVisible(true);
+                
             }
         });
     }
