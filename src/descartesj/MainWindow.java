@@ -66,8 +66,6 @@ public class MainWindow extends javax.swing.JFrame {
         buttonDiscard = new javax.swing.JToggleButton();
         buttonSelect = new javax.swing.JToggleButton();
         labelCurrentImageStatus = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         labelCurrentImagePositionInList = new javax.swing.JLabel();
         buttonPrevImage = new javax.swing.JButton();
@@ -241,7 +239,7 @@ public class MainWindow extends javax.swing.JFrame {
                     tabItemInputLayout.setVerticalGroup(
                         tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(tabItemInputLayout.createSequentialGroup()
-                            .addContainerGap(35, Short.MAX_VALUE)
+                            .addContainerGap(44, Short.MAX_VALUE)
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(tabItemInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -271,13 +269,14 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addComponent(buttonStartProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(59, 59, 59))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(35, Short.MAX_VALUE))
+                            .addContainerGap(44, Short.MAX_VALUE))
                     );
 
                     tabControlMain.addTab("1-The input", tabItemInput);
 
                     tabItemProcess.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+                    buttonRestart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                     buttonRestart.setText("<< Restart");
                     buttonRestart.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,6 +284,7 @@ public class MainWindow extends javax.swing.JFrame {
                         }
                     });
 
+                    buttonNextStep.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                     buttonNextStep.setText("Next step >>");
                     buttonNextStep.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,6 +293,7 @@ public class MainWindow extends javax.swing.JFrame {
                     });
 
                     buttonDiscard.setBackground(new java.awt.Color(153, 255, 0));
+                    buttonDiscard.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                     buttonDiscard.setText("Select");
                     buttonDiscard.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,6 +302,7 @@ public class MainWindow extends javax.swing.JFrame {
                     });
 
                     buttonSelect.setBackground(new java.awt.Color(255, 0, 51));
+                    buttonSelect.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                     buttonSelect.setText("Discard");
                     buttonSelect.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,14 +314,14 @@ public class MainWindow extends javax.swing.JFrame {
                     labelCurrentImageStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                     labelCurrentImageStatus.setText("UNRATED");
 
-                    jLabel4.setText("Prev. image");
-
-                    jLabel5.setText("Next image");
-
+                    jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                    jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
                     jLabel6.setText("Current image");
 
+                    labelCurrentImagePositionInList.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                     labelCurrentImagePositionInList.setText("(0 of 0)");
 
+                    buttonPrevImage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                     buttonPrevImage.setText("< Prev. Image");
                     buttonPrevImage.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,6 +329,7 @@ public class MainWindow extends javax.swing.JFrame {
                         }
                     });
 
+                    buttonNextImage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                     buttonNextImage.setText("Next image >");
                     buttonNextImage.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,75 +347,62 @@ public class MainWindow extends javax.swing.JFrame {
                     tabItemProcess.setLayout(tabItemProcessLayout);
                     tabItemProcessLayout.setHorizontalGroup(
                         tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
+                        .addGroup(tabItemProcessLayout.createSequentialGroup()
+                            .addContainerGap()
                             .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6)
-                                    .addGap(61, 61, 61)
-                                    .addComponent(labelCurrentImagePositionInList, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
-                                    .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                            .addContainerGap()
-                                            .addComponent(buttonRestart, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                            .addComponent(buttonPrevImage, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(buttonDiscard, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(labelCurrentImageStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(buttonNextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                    .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                            .addGap(96, 96, 96)
-                                            .addComponent(jLabel5))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(buttonNextStep)))
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(labelCurrentImagePositionInList, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addContainerGap())
                                 .addGroup(tabItemProcessLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(buttonRestart)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(buttonPrevImage)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(buttonDiscard)
+                                    .addGap(3, 3, 3)
+                                    .addComponent(labelCurrentImageStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(buttonSelect)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(buttonNextImage)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(buttonNextStep)
+                                    .addGap(25, 25, 25))))
                     );
                     tabItemProcessLayout.setVerticalGroup(
                         tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
                             .addGap(20, 20, 20)
                             .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(labelCurrentImagePositionInList)
-                                .addComponent(jLabel6))
-                            .addGap(18, 18, 18)
+                                .addComponent(jLabel6)
+                                .addComponent(labelCurrentImagePositionInList))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(imagePrev, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(imageNext, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
+                                .addComponent(imageCurrent, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
                             .addGap(18, 18, 18)
                             .addGroup(tabItemProcessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(buttonSelect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                                .addComponent(buttonNextStep, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonDiscard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonNextImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonPrevImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabItemProcessLayout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(labelCurrentImageStatus))
-                                .addComponent(buttonRestart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(buttonRestart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonPrevImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonDiscard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonSelect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonNextImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonNextStep, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelCurrentImageStatus, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addContainerGap())
                     );
+
+                    tabItemProcessLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {buttonDiscard, buttonNextImage, buttonNextStep, buttonPrevImage, buttonRestart, buttonSelect, labelCurrentImageStatus});
 
                     tabControlMain.addTab("2-The process", tabItemProcess);
 
@@ -521,7 +511,7 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(jLabel11)
                                 .addComponent(comboBoxSelectedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(comboBoxDiscardedImagesOutputFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                             .addGroup(tabItemOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(buttonEndProcess, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                                 .addComponent(progressBarOutputProcess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -666,7 +656,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(labelSummaryOpenSelectedFolder)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(labelSummaryOpenDiscardedFolder)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                             .addComponent(jLabel16)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -791,144 +781,6 @@ public class MainWindow extends javax.swing.JFrame {
         tabControlMain.setSelectedIndex(1);
         tabControlMain.doLayout();
     }//GEN-LAST:event_buttonStartProcessActionPerformed
-
-    private void buttonPrevImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrevImageActionPerformed
-        Cursor oldCursor = this.getCursor();
-        this.setCursor(Cursor.WAIT_CURSOR);
-        if ((dh.getInputList().getCurrent() < dh.getInputList().count()) && (dh.getInputList().getCurrent() > 0))
-        {
-            dh.getInputList().setCurrent(dh.getInputList().getCurrent()-1);
-
-
-            String pathPrev = dh.getImagePathForItem(dh.getInputList().getCurrent() - 1, ".JPG");
-            if ((new java.io.File(pathPrev)).exists())
-                descartesj.Utils.setIconImage(pathPrev, imagePrev);
-            else    
-                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
-        
-            String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
-            if ((new java.io.File(pathCurr)).exists())
-                descartesj.Utils.setIconImage(pathCurr, imageCurrent);
-            else
-                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
-
-
-            setCurrentImageStatusLabel();
-
-            String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
-            if ((new java.io.File(pathNext)).exists())
-                descartesj.Utils.setIconImage(pathNext, imageNext);
-            else
-                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
-
-            buttonSelect.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("selected"));
-            buttonDiscard.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("discarded"));
-        }
-        else
-        {
-            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
-        }
-        labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
-        checkInputListBounds();
-        this.setCursor(oldCursor);
-    }//GEN-LAST:event_buttonPrevImageActionPerformed
-
-    private void buttonNextImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextImageActionPerformed
-        Cursor oldCursor = this.getCursor();
-        this.setCursor(Cursor.WAIT_CURSOR);
-
-        if (dh.getInputList().getCurrent() < dh.getInputList().count()
-            && dh.getInputList().getCurrent() >= 0)
-        {
-            dh.getInputList().setCurrent(dh.getInputList().getCurrent()+1);
-
-            String pathPrev = dh.getImagePathForItem(dh.getInputList().getCurrent() - 1, ".JPG");
-           
-            if ((new java.io.File(pathPrev)).exists()) 
-                descartesj.Utils.setIconImage(pathPrev, imagePrev);
-            else    
-                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
-          
-            String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
-            if ((new java.io.File(pathCurr)).exists())
-                descartesj.Utils.setIconImage(pathCurr, imageCurrent);
-            else
-                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
-            setCurrentImageStatusLabel();
-
-            String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
-            if ((new java.io.File(pathNext)).exists())
-                descartesj.Utils.setIconImage(pathNext, imageNext);
-            else
-                descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
-            buttonSelect.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("selected"));
-            buttonDiscard.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("discarded"));
-            
-        }
-        else
-        {
-            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
-        }
-        labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
-        checkInputListBounds();
-        this.setCursor(oldCursor);
-    }//GEN-LAST:event_buttonNextImageActionPerformed
-
-    private void buttonDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDiscardActionPerformed
-        dh.getInputList().selectCurrent();
-            dh.removeFromDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
-            dh.removeFromSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
-            dh.addToSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
-            setCurrentImageStatusLabel();
-    }//GEN-LAST:event_buttonDiscardActionPerformed
-
-    private void buttonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectActionPerformed
-        dh.getInputList().discardCurrent();
-            dh.removeFromSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
-            dh.removeFromDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
-            dh.addToDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
-            setCurrentImageStatusLabel();
-    }//GEN-LAST:event_buttonSelectActionPerformed
-
-    private void buttonRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRestartActionPerformed
-         this.buttonStartProcessActionPerformed(evt);
-    }//GEN-LAST:event_buttonRestartActionPerformed
-
-    private void buttonNextStepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextStepActionPerformed
-        listViewSelectedImages.removeAll();
-        DefaultListModel listModelSelected = new DefaultListModel();
-        listViewSelectedImages.setModel(listModelSelected);
-        listViewDiscardedImages.removeAll();
-        DefaultListModel listModelDiscarded = new DefaultListModel();
-        listViewDiscardedImages.setModel(listModelDiscarded);
-        for (DImage item : dh.getSelectedList().getList())
-        {
-            String extensions = "";
-            for (DFile file : item.getFiles())
-            {
-                extensions += "(" + file.getExt() + ")";
-            }
-
-            listModelSelected.addElement(
-                    item.getFileTitle() + " " + extensions
-                );
-        }
-        labelNumSelectedImages.setText("(" + dh.getSelectedList().count() + ")");
-        for (DImage item : dh.getDiscardedList().getList())
-        {
-            String extensions = "";
-            for (DFile file : item.getFiles())
-            {
-                extensions += "(" + file.getExt() + ")";
-            }
-
-            listModelDiscarded.addElement(
-                    item.getFileTitle() + " " + extensions
-                );
-        }
-        labelNumDiscardedImages.setText("(" + dh.getDiscardedList().count() + ")");
-        tabControlMain.setSelectedComponent(tabItemOutput);
-    }//GEN-LAST:event_buttonNextStepActionPerformed
 
     private static void messagebox(JFrame window, String message, String title, Integer options) {       
         JOptionPane.showMessageDialog(window, message, title, options);    
@@ -1067,6 +919,142 @@ public class MainWindow extends javax.swing.JFrame {
     private void formAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_formAncestorResized
         this.dyn_resize();
     }//GEN-LAST:event_formAncestorResized
+
+    private void buttonNextImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextImageActionPerformed
+        Cursor oldCursor = this.getCursor();
+        this.setCursor(Cursor.WAIT_CURSOR);
+
+        if (dh.getInputList().getCurrent() < dh.getInputList().count()
+            && dh.getInputList().getCurrent() >= 0)
+        {
+            dh.getInputList().setCurrent(dh.getInputList().getCurrent()+1);
+
+            String pathPrev = dh.getImagePathForItem(dh.getInputList().getCurrent() - 1, ".JPG");
+
+            if ((new java.io.File(pathPrev)).exists())
+            descartesj.Utils.setIconImage(pathPrev, imagePrev);
+            else
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+
+            String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
+            if ((new java.io.File(pathCurr)).exists())
+            descartesj.Utils.setIconImage(pathCurr, imageCurrent);
+            else
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
+            setCurrentImageStatusLabel();
+
+            String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
+            if ((new java.io.File(pathNext)).exists())
+            descartesj.Utils.setIconImage(pathNext, imageNext);
+            else
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
+            buttonSelect.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("selected"));
+            buttonDiscard.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("discarded"));
+
+        }
+        else
+        {
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+        }
+        labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
+        checkInputListBounds();
+        this.setCursor(oldCursor);
+    }//GEN-LAST:event_buttonNextImageActionPerformed
+
+    private void buttonPrevImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrevImageActionPerformed
+        Cursor oldCursor = this.getCursor();
+        this.setCursor(Cursor.WAIT_CURSOR);
+        if ((dh.getInputList().getCurrent() < dh.getInputList().count()) && (dh.getInputList().getCurrent() > 0))
+        {
+            dh.getInputList().setCurrent(dh.getInputList().getCurrent()-1);
+
+            String pathPrev = dh.getImagePathForItem(dh.getInputList().getCurrent() - 1, ".JPG");
+            if ((new java.io.File(pathPrev)).exists())
+            descartesj.Utils.setIconImage(pathPrev, imagePrev);
+            else
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+
+            String pathCurr = dh.getImagePathForItem(dh.getInputList().getCurrent(), ".JPG");
+            if ((new java.io.File(pathCurr)).exists())
+            descartesj.Utils.setIconImage(pathCurr, imageCurrent);
+            else
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageCurrent);
+
+            setCurrentImageStatusLabel();
+
+            String pathNext = dh.getImagePathForItem(dh.getInputList().getCurrent() +1, ".JPG");
+            if ((new java.io.File(pathNext)).exists())
+            descartesj.Utils.setIconImage(pathNext, imageNext);
+            else
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imageNext);
+
+            buttonSelect.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("selected"));
+            buttonDiscard.setSelected(dh.getInputList().getList().get(dh.getInputList().getCurrent()).getStatus().equalsIgnoreCase("discarded"));
+        }
+        else
+        {
+            descartesj.Utils.setIconDirectToImage(this.unavailableImage, imagePrev);
+        }
+        labelCurrentImagePositionInList.setText(getCurrentImagePositionCaption());
+        checkInputListBounds();
+        this.setCursor(oldCursor);
+    }//GEN-LAST:event_buttonPrevImageActionPerformed
+
+    private void buttonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectActionPerformed
+        dh.getInputList().discardCurrent();
+        dh.removeFromSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+        dh.removeFromDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+        dh.addToDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+        setCurrentImageStatusLabel();
+    }//GEN-LAST:event_buttonSelectActionPerformed
+
+    private void buttonDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDiscardActionPerformed
+        dh.getInputList().selectCurrent();
+        dh.removeFromDiscardedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+        dh.removeFromSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+        dh.addToSelectedList(dh.getInputList().getList().get(dh.getInputList().getCurrent()));
+        setCurrentImageStatusLabel();
+    }//GEN-LAST:event_buttonDiscardActionPerformed
+
+    private void buttonNextStepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextStepActionPerformed
+        listViewSelectedImages.removeAll();
+        DefaultListModel listModelSelected = new DefaultListModel();
+        listViewSelectedImages.setModel(listModelSelected);
+        listViewDiscardedImages.removeAll();
+        DefaultListModel listModelDiscarded = new DefaultListModel();
+        listViewDiscardedImages.setModel(listModelDiscarded);
+        for (DImage item : dh.getSelectedList().getList())
+        {
+            String extensions = "";
+            for (DFile file : item.getFiles())
+            {
+                extensions += "(" + file.getExt() + ")";
+            }
+
+            listModelSelected.addElement(
+                item.getFileTitle() + " " + extensions
+            );
+        }
+        labelNumSelectedImages.setText("(" + dh.getSelectedList().count() + ")");
+        for (DImage item : dh.getDiscardedList().getList())
+        {
+            String extensions = "";
+            for (DFile file : item.getFiles())
+            {
+                extensions += "(" + file.getExt() + ")";
+            }
+
+            listModelDiscarded.addElement(
+                item.getFileTitle() + " " + extensions
+            );
+        }
+        labelNumDiscardedImages.setText("(" + dh.getDiscardedList().count() + ")");
+        tabControlMain.setSelectedComponent(tabItemOutput);
+    }//GEN-LAST:event_buttonNextStepActionPerformed
+
+    private void buttonRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRestartActionPerformed
+        this.buttonStartProcessActionPerformed(evt);
+    }//GEN-LAST:event_buttonRestartActionPerformed
 
     
     private Boolean cleanUpControls(){
@@ -1237,8 +1225,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
